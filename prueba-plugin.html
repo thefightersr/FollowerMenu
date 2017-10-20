@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css" > -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+
+
+<!-- Grid pure-g -->
+<!-- <link rel="stylesheet" href="css/grids-min.css" > -->
+<link rel="stylesheet" href="css/plugin.css">
+    <script src="plugin.js"></script>
+    <script>
+    $(document).ready(function(){
+      $("body").followermenu({
+        marginTop:'45%',
+        marginSide:50,
+        marginOtherSide:'-100px',
+        activatePreview:true,
+        activateSlide:false,
+        activateTeam:false,
+        activateGrid:true,
+        activateSecondMenu:true,
+        optionsMenu:[{
+          optionName:'HOME',
+          functionName:'preview',
+          functionData:'img/preview.jpg',
+          href:'',
+          activateMenu:'true'
+          },{
+            optionName:'GRID',
+            functionName:'gridCamp',
+            href:'',
+            functionData:[
+              {
+                row:[
+                    {
+                    colSize:12,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 12'}
+                  }
+                ]
+              },{
+                row:[
+                    {
+                    colSize:8,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 8'}
+                  },{
+                    colSize:4,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 4'}
+                  }
+                ]
+              },{
+                row:[
+                    {
+                    colSize:6,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 6'}
+                  },{
+                    colSize:6,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 6'}
+                  }
+                ]
+              },{
+                row:[
+                    {
+                    colSize:4,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 4'}
+                  },{
+                    colSize:4,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 4'}
+                  },{
+                    colSize:4,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 4'}
+                  }
+                ]
+              },{
+                row:[
+                    {
+                    colSize:3,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 3'}
+                  },{
+                    colSize:3,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 3'}
+                  },{
+                    colSize:3,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 3'}
+                  },{
+                    colSize:3,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 3'}
+                  }
+                ]
+              },{
+                row:[
+                    {
+                    colSize:7,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 7'}
+                  },{
+                    colSize:5,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 5'}
+                  }
+                ]
+              },{
+                row:[
+                    {
+                    colSize:3,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 3'}
+                  },{
+                    colSize:9,
+                    colData:{
+                      imagePath:'',
+                      textContent:'COL 9'}
+                  }
+                ]
+              }
+            ],
+          },{
+            optionName:'PORTFOLIO',
+            functionName:'gridCamp',
+            href:'',
+            functionData:[
+              {
+                row:[
+                    {
+                    colSize:4,
+                    colData:{
+                      imagePath:'img/12s.jpg',
+                      textContent:'Paisaje'}
+                  },{
+                  colSize:4,
+                  colData:{
+                    imagePath:'img/12s.jpg',
+                    textContent:'Paisaje'}
+                },{
+                colSize:4,
+                colData:{
+                  imagePath:'img/12s.jpg',
+                  textContent:'Paisaje'}
+              }
+                ]
+              },{
+                row:[
+                    {
+                    colSize:4,
+                    colData:{
+                      imagePath:'img/12s.jpg',
+                      textContent:'Paisaje'}
+                  },{
+                  colSize:4,
+                  colData:{
+                    imagePath:'img/12s.jpg',
+                    textContent:'Paisaje'}
+                },{
+                colSize:4,
+                colData:{
+                  imagePath:'img/12s.jpg',
+                  textContent:'Paisaje'}
+              }
+                ]
+              },{
+                row:[
+                    {
+                    colSize:4,
+                    colData:{
+                      imagePath:'img/12s.jpg',
+                      textContent:'Paisaje'}
+                  },{
+                    colSize:4,
+                    colData:{
+                      imagePath:'img/12s.jpg',
+                      textContent:'Paisaje'}
+                  },{
+                    colSize:4,
+                    colData:{
+                      imagePath:'img/12s.jpg',
+                      textContent:'Paisaje'}
+                  }
+                ]
+              },{
+                row:[
+                    {
+                    colSize:4,
+                    colData:{
+                      imagePath:'img/12s.jpg',
+                      textContent:'Paisaje'}
+                  },{
+                    colSize:4,
+                    colData:{
+                      imagePath:'img/12s.jpg',
+                      textContent:'Paisaje'}
+                  },{
+                    colSize:4,
+                    colData:{
+                      imagePath:'img/12s.jpg',
+                      textContent:'Paisaje'}
+                  }
+                ]
+              },
+            ],
+            // functionData:[
+            //   {
+            //     colFunction:'list',
+            //     colTitle:'Features',
+            //     colSize:1,
+            //     colData:[
+            //       'Boostrap 4','All Explorers','Modern Desing','Very Easy','Full Customizable'
+            //     ]
+            //   },{
+            //     colFunction:'images',
+            //     colSize:3, //3 imagenes por cada col
+            //     colTitle:'Previews',
+            //     colData:[
+            //       'image1.jpg','image2.jpg','image3.jpg','image4.jpg'
+            //     ]
+            //   }
+            // ],
+          },{
+          optionName:'SERVICES',
+          functionName:'secondMenu',
+          href:'',
+          functionData:[{
+              optionName:'ANGULAR',
+              functionName:'',
+              functionData:''
+              },{
+                optionName:'WEBS',
+                functionName:'preview',
+                functionData:''
+              },{
+                optionName:'SEO',
+                functionName:'',
+                functionData:''
+              },{
+                optionName:'PLANTILLAS',
+                functionName:'',
+                functionData:''
+              },{
+                optionName:'PLANTILLAS',
+                functionName:'',
+                functionData:''
+              },{
+                optionName:'PLANTILLAS',
+                functionName:'',
+                functionData:''
+              },{
+                optionName:'PLANTILLAS',
+                functionName:'',
+                functionData:''
+              }
+            ]
+          },{
+          optionName:'TEAM',
+          functionName:'workTeam',
+          href:'',
+          functionData:[{
+              employedName:'John Doe',
+              roll:'Directive',
+              imagePath:'img/jhondoe.jpg'
+            },{
+              employedName:'John Doe',
+              roll:'Directive',
+              imagePath:'img/jhondoe.jpg'
+            },{
+              employedName:'John Doe',
+              roll:'Directive',
+              imagePath:'img/jhondoe.jpg'
+            },{
+              employedName:'John Doe',
+              employedRoll:'Directive',
+              imagePath:'img/jhondoe.jpg'
+            },{
+              employedName:'John Doe',
+              roll:'Directive',
+              imagePath:'img/jhondoe.jpg'
+            },{
+              employedName:'John Doe',
+              roll:'Directive',
+              imagePath:'img/jhondoe.jpg'
+            }],
+          },{
+            optionName:'SHOP',
+            functionName:'shop',
+            href:'',
+            functionData:[
+              {
+                tabTitle:'OFFERS',
+                tabData:[{
+                      colFunction:'imageBanner',
+                      colSize:1,
+                      colData:'image1.jpg'
+                    },
+                    {
+                      colFunction:'itemsShop',
+                      colSize:3, //3 imagenes por cada col
+                      colData:[
+                        {
+                          imagePath:'image-item1.jpg',
+                          priceItem:'356',
+                        },{
+                          imagePath:'image-item2.jpg',
+                          priceItem:'356',
+                        },{
+                          imagePath:'image-item3.jpg',
+                          priceItem:'356',
+                        },{
+                          imagePath:'image-item4.jpg',
+                          priceItem:'356',
+                        }
+                      ]
+                    }]
+                }],
+          },{
+          optionName:'CONTACTS',
+          functionName:'contact',
+          href:'',
+          functionData:{
+            principalMessage:'¿Tienes algo que decirnos?',
+            areaEmail:'Cual es su correo?',
+            areaMessage:'¿Que quieres decirnos?',
+            mapImage:'map-image.jpg'
+          }
+          },{
+            optionName:'PLANTILLAS',
+            functionName:'',
+            functionData:''
+          },{
+            optionName:'PLANTILLAS',
+            functionName:'',
+            functionData:''
+          },{
+            optionName:'PLANTILLAS',
+            functionName:'',
+            functionData:''
+          },{
+            optionName:'PLANTILLAS',
+            functionName:'',
+            functionData:''
+          },{
+            optionName:'PLANTILLAS',
+            functionName:'',
+            functionData:''
+          }
+        ],
+      });
+
+
+    });
+    </script>
+    <style type="text/css">
+
+            /*Vertical scrollbar - set width and height of a div you want to add a scrollbar to*/
+        #vertical-scrollbar-demo {
+            height: 100px;
+            width: 400px;
+        }
+
+            /*Horizontal scrollbar - set width and height of a div you want to add a scrollbar to*/
+        #horizontal-scrollbar-demo {
+            width: 400px;
+            height: 200px;
+        }
+
+            /*Horizontal scrollbar - set width of overview or make it expand horizontal like below*/
+        #horizontal-scrollbar-demo .overview {
+            /*width: 1836px;*/
+            /* or */
+            white-space: nowrap;
+        }
+
+        #horizontal-scrollbar-demo img {
+            height: 180px;
+            width: 180px;
+        }
+
+            /*Vertical and horizontal scrollbar - set width and height of a div you want to add a scrollbar to*/
+        #vertical-horizontal-scrollbar-demo {
+            width: 400px;
+            height: 200px;
+        }
+
+            /* Vertical and horizontal scrollbar - one extra step required - add width of overview - overall width of scrolled content*/
+        #vertical-horizontal-scrollbar-demo .overview {
+            width: 600px;
+        }
+    <style media="screen">
+      body{
+        background: #aaaa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="col-md-4">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
