@@ -145,7 +145,7 @@ $.ventana_alto = $(window).height();
     content = "<li id='"+option.optionName+"' class='optionsMenu "+option.functionName+" activate"+option.activateMenu+"'>"+option.optionName+"</li>";
     $('#followerMenuOptions').append(content);
     $.widthOptions += $('#'+option.optionName).width();
-    $.widthOptions += +3;
+    $.widthOptions += +1;
   });
   content="";
   //Create main content secondMenu
@@ -467,7 +467,7 @@ $(document).mousemove(function(event){
       var z;
       var y;
       var xy;
-      var maxDesployer = $.widthOptions-350;
+      var maxDesployer = $.widthOptions-300;
       var anchoVentana = $(window).width(); // Ancho de la ventana para calcular el el Parallax inverso
       if($.widthOptions>391){ //Saber el tamaño de la lista para establecer la velocidad de desplazamiento
         $('.parallax').each(function(){
@@ -477,18 +477,32 @@ $(document).mousemove(function(event){
           }else if(position<(anchoVentana-150)){ // Establecer moviento del parallax despues de los 150px
             z=position-(anchoVentana-150); //Establecer moviento y restarle los 150px que estuvo inmovil
             y=z; //Almacenar dato en variable de moviento definitivo
-            if(y<(-maxDesployer)){
-              z=(-maxDesployer);
+            var porcentMax = maxDesployer*3/100;
+            if(porcentMax<5){porcentMax=50}
+            else if(porcentMax>10){porcentMax=5}
+            console.log(porcentMax+' porcentaje');
+            if(y<(-maxDesployer+porcentMax)){
+              z=(-maxDesployer+porcentMax);
             }
             if($.widthOptions>700){
-              z=z*1.8;
-              if(z<(330-$.widthOptions)){
+              z=z*1.4;
+              if(z<(280-$.widthOptions)){
                 z=(-maxDesployer-20);
               }
             } if($.widthOptions>850){
-              z=z*2;
-              if(z<(330-$.widthOptions)){
+              z=z*1.6;
+              if(z<(280-$.widthOptions)){
                 z=(-maxDesployer-20);
+              }
+            } if($.widthOptions>1000){
+              z=z*1.7;
+              if(z<(200-$.widthOptions)){
+                z=(-maxDesployer-100);
+              }
+            } if($.widthOptions>1500){
+              z=z*1.8;
+              if(z<(120-$.widthOptions)){
+                z=(-maxDesployer-180);
               }
             }
 
@@ -502,8 +516,7 @@ $(document).mousemove(function(event){
       var z;
       var y;
       var xy;
-      var maxDesployer = $.widthOptions-350;//La cantidad de pixels maxima que recorrera el parallax
-      var ancho = $("#followerMenuOptions").width();
+      var maxDesployer = $.widthOptions-300;//La cantidad de pixels maxima que recorrera el parallax
       if($.widthOptions>391){
         $('.parallax').each(function(){
           var $this = $(this);
@@ -513,15 +526,43 @@ $(document).mousemove(function(event){
             count=position-145;
             z=position-150;
             y=z;
-            if(y>maxDesployer){
-              z=maxDesployer;
+            var porcentMax = maxDesployer*3/100;
+            if(porcentMax<5){porcentMax=50}
+            else if(porcentMax>10){porcentMax=5}
+            console.log(position+' position');
+            if(y>maxDesployer-porcentMax){
+              z=maxDesployer-porcentMax;
             }
-            if($.widthOptions>780){
-              z=z*1.7;
-              if(z>($.widthOptions-330)){
+            if($.widthOptions>700){
+              z=z*1.4;
+              if(z>($.widthOptions-280)){
+                z=(maxDesployer+20);
+              }
+            } if($.widthOptions>850){
+              z=z*1.6;
+              if(z>($.widthOptions-280)){
                 z=maxDesployer+20;
               }
+            } if($.widthOptions>1000){
+              z=z*1.7;
+              if(z>($.widthOptions-200)){
+                z=maxDesployer+100;
+              }
+            } if($.widthOptions>1500){
+              z=z*1.8;
+              if(z>($.widthOptions-120)){
+                z=maxDesployer+180;
+              }
             }
+            // if(y>maxDesployer){
+            //   z=maxDesployer;
+            // }
+            // if($.widthOptions>780){
+            //   z=z*1.7;
+            //   if(z>($.widthOptions-330)){
+            //     z=maxDesployer+20;
+            //   }
+            // }
             y = -z;
             xy =  y + 'px';
             $this.css({ 'transform':'translateX('+xy+')'});
