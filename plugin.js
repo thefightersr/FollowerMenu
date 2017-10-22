@@ -115,10 +115,12 @@ $.ventana_alto = $(window).height();
       }
     },options);
   marginSide=$.settings.marginSide;
+  $.marginTop=$.settings.marginTop;
   //Create main content
   if(true){
     content = "<div id='followerMenuContainer'>";
     content += "<div id='followerMenuOptionsDeployed'>";
+    content += "<div id='secondMenuContainer'></div>";
     content += "<ul id='followerMenuOptions' class='parallax'><ul>";
     content += "<i id='followerMenuArrow' class='fa fa-sort-desc'></i>";
     //Create container secondMenu
@@ -131,8 +133,8 @@ $.ventana_alto = $(window).height();
     content += "<i id='search-menu-right' class='fa fa-search'></i>";
     content += "<i id='login-menu-right' class='fa fa-user'></i>";
     content += "<i id='login-menu-left' class='fa fa-user'></i>";
-    content += "<div id='followerMenuButton-left'>MENU</div>";
-    content += "<div id='followerMenuButton-right'>MENU</div>";
+    content += "<div id='followerMenuButton-left' class='hvr-radial-out'>MENU</div>";
+    content += "<div id='followerMenuButton-right' class='hvr-radial-out'>MENU</div>";
     content += "</div>";//Close followerMenuContainer
     $('body').append(content);
     content = "";
@@ -142,7 +144,7 @@ $.ventana_alto = $(window).height();
   $.widthOptions=0;
   $.settings.optionsMenu.forEach((option)=>{
     idO++;
-    content = "<li id='"+option.optionName+"' class='optionsMenu "+option.functionName+" activate"+option.activateMenu+"'>"+option.optionName+"</li>";
+    content = "<li id='"+option.optionName+"' class='optionsMenu hvr-underline-from-center "+option.functionName+" activate"+option.activateMenu+"'>"+option.optionName+"</li>";
     $('#followerMenuOptions').append(content);
     $.widthOptions += $('#'+option.optionName).width();
     $.widthOptions += +1;
@@ -152,12 +154,12 @@ $.ventana_alto = $(window).height();
   if($.settings.activateSecondMenu){
     $.settings.optionsMenu.forEach((option)=>{
       if(option.functionName=="secondMenu"){
-        content += "<div class='secondMenuContainer' id='"+option.optionName+"Fn'><div id='containerUlSecondMenu'><ul class='parallaxSecond' id='"+option.optionName+"FnS'>";
+        content += "<div id='"+option.optionName+"Fn' class='containerUlSecondMenu'><ul class='parallaxSecond' id='"+option.optionName+"Ul'>";
         option.functionData.forEach((b)=>{
-          content += "<li class='optionSecondMenu' id='"+b.optionName+"'>"+b.optionName+"</li>";
+          content += "<li class='optionSecondMenu hvr-shutter-in-horizontal "+b.functionName+"' id='"+b.optionName+"Sec'>"+b.optionName+"</li>";
         })
-        content += "</ul></div></div>";
-        $("#followerMenuOptionsDeployed").append(content);
+        content += "</ul></div>";
+        $("#secondMenuContainer").append(content);
         content = "";
       }
     });
@@ -165,24 +167,45 @@ $.ventana_alto = $(window).height();
     //Deslizar contenido secondMenu
     $('.secondMenu').hover((element)=>{
       $.idSecondMenu = element.target.id;
-      $("#"+$.idSecondMenu+"Fn").css({
+      $("#secondMenuContainer").css({
         'opacity':'1',
-        'height': '330px',
+        'height': '55px',
         'z-index': '1'
       });
         $.widthSecondOptions=0;
-        var childElement =$("#"+$.idSecondMenu+"FnS");
-      childElement[0].childNodes.forEach((li)=>{
+        var childElement =$("#"+$.idSecondMenu+"Ul");
+        $.parallaxElement = childElement;
+        childElement = childElement[0]
+        childElement.childNodes.forEach((li)=>{
         $.widthSecondOptions += +$('#'+li.id).width();
       });
-      $.parallaxElement = childElement;
       $('#borderFollowerMenu').animate({opacity:0},0);
     },()=>{
+      // $("#"+$.idSecondMenu+"Fn").css({
+      //   'opacity':'1',
+      //   'height': '55px',
+      //   'z-index': '1'
+      // });
+      $('#borderFollowerMenu').animate({opacity:1},0);
+    });
+    //Deslizar contenido secondMenu
+    $('.optionSecondMenu').hover((element)=>{
+      $.idSecondMenu = element.target.id;
       $("#"+$.idSecondMenu+"Fn").css({
+        'opacity':'1',
+        'z-index': '1'
+      });
+      $("#secondMenuContainer").css({
         'opacity':'1',
         'height': '330px',
         'z-index': '1'
       });
+      $('#borderFollowerMenu').animate({opacity:0},0);
+    },()=>{
+      // $("#"+$.idSecondMenu+"Fn").css({
+      //   'opacity':'0',
+      //   'z-index': '-1'
+      // });
       $('#borderFollowerMenu').animate({opacity:1},0);
     });
   }
@@ -198,7 +221,7 @@ $.ventana_alto = $(window).height();
       if(option.functionName=="secondMenu"){
         option.functionData.forEach((second)=>{
           if(second.functionName=="preview"){
-            content = "<div class='previewFunction previewFunctionSecond' id='"+second.optionName+"Fn'><img id='imgPreview' src='"+second.functionData+"'></div>";
+            content = "<div class='previewFunction previewFunctionSecond' id='"+second.optionName+"SecFn'><img id='imgPreview' src='"+second.functionData+"'></div>";
             $("#secondMenuContainer").append(content);
             content="";
           }
@@ -413,7 +436,7 @@ $.ventana_alto = $(window).height();
     $.element = elementObj.target.id;
     var position=$('#'+$.element).position();
     var width=$('#'+$.element).width();
-    var positionDef=(width/2)-2+position.left+"px";
+    var positionDef=(width/2)+position.left+"px";
     $("#followerMenuArrow").css({
       'left':positionDef,
       opacity:1,
@@ -430,8 +453,6 @@ $.ventana_alto = $(window).height();
 //Include all function of mousemove like parallax effect
 $(document).mousemove(function(event){
   position=event.pageX;
-  console.log(position);
-  console.log($.widthOptions);
   if($.switch==false){
       //Mostrar boton menu izquierdo y ocuktar derecho
       if(position<$.tamañoVentana){
@@ -477,10 +498,9 @@ $(document).mousemove(function(event){
           }else if(position<(anchoVentana-150)){ // Establecer moviento del parallax despues de los 150px
             z=position-(anchoVentana-150); //Establecer moviento y restarle los 150px que estuvo inmovil
             y=z; //Almacenar dato en variable de moviento definitivo
-            var porcentMax = maxDesployer*3/100;
-            if(porcentMax<5){porcentMax=50}
+            var porcentMax = maxDesployer*3/100; //Crear margen del limmite
+            if(porcentMax<5){porcentMax=50} //Establecer margen de limite
             else if(porcentMax>10){porcentMax=5}
-            console.log(porcentMax+' porcentaje');
             if(y<(-maxDesployer+porcentMax)){
               z=(-maxDesployer+porcentMax);
             }
@@ -529,7 +549,6 @@ $(document).mousemove(function(event){
             var porcentMax = maxDesployer*3/100;
             if(porcentMax<5){porcentMax=50}
             else if(porcentMax>10){porcentMax=5}
-            console.log(position+' position');
             if(y>maxDesployer-porcentMax){
               z=maxDesployer-porcentMax;
             }
@@ -671,7 +690,7 @@ function showButtonMenu(side, otherSide){
     $('#search-menu-left ,#login-menu-left').delay(delayHideButton).animate({left: '-25px'},25);
   }
   $("#followerMenuButton-left, #followerMenuButton-right").css({
-    'top':$.settings.marginTop,
+    'top':$.marginTop,
     'box-shadow':'1px 1px 8px 0px grey',
   });
   $.i=0;
@@ -680,7 +699,6 @@ function showButtonMenu(side, otherSide){
 //Pendiente de comprobar si se usa, creo que no
 //llamando funcion de movimiento fuera del mousemove
 function parallaxEfect(element){
-
 if($.side=="right"){
   element.addClass('rightSecondOptions').removeClass('leftSecondOptions');
   var z;
@@ -696,13 +714,16 @@ if($.side=="right"){
       }else if(position<(anchoVentana-150)){ // Establecer moviento del parallax despues de los 150px
         z=position-(anchoVentana-150); //Establecer moviento y restarle los 150px que estuvo inmovil
         y=z; //Almacenar dato en variable de moviento definitivo
-        if(y<(-maxDesployer)){
-          z=(-maxDesployer);
+        var porcentMax = maxDesployer*3/100; //Crear margen del limmite
+        if(porcentMax<5){porcentMax=50} //Establecer margen de limite
+        else if(porcentMax>10){porcentMax=5}
+        if(y<(-maxDesployer+porcentMax)){
+          z=(-maxDesployer+porcentMax);
         }
         if($.widthSecondOptions>780){
           z=z*1.7;
-          if(z<(330-$.widthSecondOptions)){
-            z=(-maxDesployer-20);
+          if(z<(420-$.widthSecondOptions)){
+            z=(-maxDesployer);
           }
         }
         y = -z;
@@ -726,13 +747,16 @@ if($.side=="right"){
         count=position-145;
         z=position-150;
         y=z;
-        if(y>maxDesployer){
-          z=maxDesployer;
+        var porcentMax = maxDesployer*3/100;
+        if(porcentMax<5){porcentMax=50}
+        else if(porcentMax>10){porcentMax=5}
+        if(y>maxDesployer-porcentMax){
+          z=maxDesployer-porcentMax;
         }
         if($.widthSecondOptions>780){
           z=z*1.7;
-          if(z>($.widthSecondOptions-330)){
-            z=maxDesployer+20;
+          if(z>($.widthSecondOptions-420)){
+            z=maxDesployer;
           }
         }
         y = -z;
