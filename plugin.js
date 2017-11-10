@@ -1,3 +1,7 @@
+$.time=1500;
+$.countImagesFinal=2;
+$.imageCurrent=0;
+$.slideImagePx=0;
 $.switch=false;
 $.showright=false;
 $.showleft=false;
@@ -45,34 +49,6 @@ $.ventana_alto = $(window).height();
             'CLOTHING',
             'OUTWEAR',
           ]
-        },
-      workTeam:{
-          peopleName:'NOSOTROS',
-          peoples:[{
-            employedName:'John Doe',
-            roll:'Directive',
-            imagePath:'img/jhondoe.jpg'
-          },{
-            employedName:'John Doe',
-            roll:'Directive',
-            imagePath:'img/jhondoe.jpg'
-          },{
-            employedName:'John Doe',
-            roll:'Directive',
-            imagePath:'img/jhondoe.jpg'
-          },{
-            employedName:'John Doe',
-            employedRoll:'Directive',
-            imagePath:'img/jhondoe.jpg'
-          },{
-            employedName:'John Doe',
-            roll:'Directive',
-            imagePath:'img/jhondoe.jpg'
-          },{
-            employedName:'John Doe',
-            roll:'Directive',
-            imagePath:'img/jhondoe.jpg'
-          },]
         },
       imagesSlide:[{
         nameSlide:'slide1',
@@ -148,23 +124,95 @@ $.ventana_alto = $(window).height();
     $('#followerMenuOptions').append(content);
     $.widthOptions += $('#'+option.optionName).width();
     $.widthOptions += +1;
+    //Create main content secondMenu
+    if($.settings.activateSecondMenu){
+      content = "";
+      var count=0;
+        if(option.functionName=="secondMenu"){
+          content += "<div id='"+option.optionName+"Fn' style='position:absolute' class='containerUlSecondMenu'><ul class='parallaxSecond' id='"+option.optionName+"Ul'></ul></div>";
+          $("#secondMenuContainer").append(content);
+          $.widthSecondOptions=0;
+          contentSecond = "";
+          option.functionData.forEach((b)=>{
+            contentSecond = "<li class='optionSecondMenu hvr-back-pulse "+b.functionName+"' id='"+b.optionName+"Sec'>"+b.optionName+"</li>";
+            $("#"+option.optionName+"Ul").append(contentSecond);
+            $.widthSecondOptions+= $("#"+b.optionName+"Sec").width();
+
+          })
+          $("#"+option.optionName+"Ul").attr('sizeData',$.widthSecondOptions);
+        }
+    }
+    //End function secondMenu
+    if($.settings.activateShop){
+      content="";
+      var i=0;
+      if(option.functionName=="shop"){
+        content = "<div id='"+option.optionName+"Fn' class='shopClass'><ul class='tabsClass'></ul></div>";
+        $('#followerMenuOptionsDeployed').append(content);
+        option.functionData.forEach((b)=>{
+          i++;
+          if(i==1){var color1='black'; var color2='white'}
+          content = "<li style='background-color:"+color1+"; color:"+color2+"' id='"+b.tabTitle+"' class='tabsOptionClass'>"+b.tabTitle+"</li>";
+          $('#'+option.optionName+'Fn ul.tabsClass').append(content);
+          content = "<div id='"+b.tabTitle+"Tab' class='mainContainerClass hideItem'>";
+          var side='';
+          b.tabData.forEach((tab)=>{
+            switch (tab.colFunction){
+              case 'imageBanner':
+                if(tab.colSide=='right'){ side='right'}
+                content += "<div class='imageBanner "+side+"Banner'><img class='imgBanner' src='"+tab.colData+"'></div>";
+                break;
+              case 'itemsShop':
+                content += "<div class='itemsContainerClass "+side+"Item'>";
+                tab.colData.forEach((item)=>{
+                  content += "<div class='itemShopClass'><img class='img-fluid' src='"+item.imagePath+"' class='itemImage'><div class='textItem'><p>"+item.priceItem+" <i class='fa fa-shopping-cart'></i></p></div></div>"
+                });
+                content += "</div>";
+                break;
+              case 'tags':
+                content += "<div class='tagsContainerClass colgrid"+tab.colSize+" "+side+"Item'><h4 class='tittleUl'>"+tab.colTitle+"</h4><ul>";
+                var i=0;
+                tab.colData.forEach((item)=>{
+                  i++;
+                  content += "<li class='itemTagClass'>"+item.titleTag+"</li>"
+                  if(i==4){
+                    content += "</ul><ul>";
+                    i=0;
+                  }
+                });
+                content += "</ul></div>";
+              default:
+            }
+          })
+          content += "</div>";
+          $('#'+option.optionName+'Fn').append(content);
+        })
+      }
+    }
+
   });
   content="";
-  //Create main content secondMenu
-  if($.settings.activateSecondMenu){
-    $.settings.optionsMenu.forEach((option)=>{
-      if(option.functionName=="secondMenu"){
-        content += "<div id='"+option.optionName+"Fn' class='containerUlSecondMenu'><ul class='parallaxSecond' id='"+option.optionName+"Ul'>";
-        option.functionData.forEach((b)=>{
-          content += "<li class='optionSecondMenu hvr-shutter-in-horizontal "+b.functionName+"' id='"+b.optionName+"Sec'>"+b.optionName+"</li>";
-        })
-        content += "</ul></div>";
-        $("#secondMenuContainer").append(content);
-        content = "";
-      }
+  if($.settings.activateShop){
+    $('.tabsOptionClass').click((element)=>{
+      $('.tabsOptionClass').css({
+        'background-color':'',
+        'color':''
+      });
+      $.idTab = element.target.id;
+      console.log(element);
+      $("#"+$.idTab).css({
+        'background-color':'black',
+        'color':'white'
+      })
+      $("#"+$.idTab+'Tab').removeClass('hideItem').slideDown('fast');
+      $('.hideItem').slideUp('fast');
+      $("#"+$.idTab+'Tab').addClass('hideItem');
     });
+  }
+  if($.settings.activateSecondMenu){
     //Hover secondMenu
     //Deslizar contenido secondMenu
+    $('.containerUlSecondMenu').hide('fast');
     $('.secondMenu').hover((element)=>{
       $.idSecondMenu = element.target.id;
       $("#secondMenuContainer").css({
@@ -172,26 +220,32 @@ $.ventana_alto = $(window).height();
         'height': '55px',
         'z-index': '1'
       });
-        $.widthSecondOptions=0;
-        var childElement =$("#"+$.idSecondMenu+"Ul");
-        $.parallaxElement = childElement;
-        childElement = childElement[0]
-        childElement.childNodes.forEach((li)=>{
-        $.widthSecondOptions += +$('#'+li.id).width();
-      });
+      $("#"+$.idSecondMenu+'Fn').show();
+      if($("#"+$.idSecondMenu+'Ul').attr('sizedata')<460){
+        $('ul.parallaxSecond').css({
+          'justify-content':'center'
+        });
+      }else{
+        $('ul.parallaxSecond').css({
+          'justify-content':''
+        });
+      }
       $('#borderFollowerMenu').animate({opacity:0},0);
     },()=>{
-      // $("#"+$.idSecondMenu+"Fn").css({
-      //   'opacity':'1',
-      //   'height': '55px',
-      //   'z-index': '1'
+      // $("#"+$.idSecondMenu+'Fn').css({
+      //   'opacity':'0',
+      //   'display':'block',
+      //   'z-index': '0'
       // });
+      $('ul.parallaxSecond').css({
+        'z-index':'0'
+      });
       $('#borderFollowerMenu').animate({opacity:1},0);
     });
     //Deslizar contenido secondMenu
     $('.optionSecondMenu').hover((element)=>{
-      $.idSecondMenu = element.target.id;
-      $("#"+$.idSecondMenu+"Fn").css({
+      $.idOptionSecondMenu = element.target.id;
+      $("#"+$.idOptionSecondMenu+"Fn").css({
         'opacity':'1',
         'z-index': '1'
       });
@@ -202,19 +256,19 @@ $.ventana_alto = $(window).height();
       });
       $('#borderFollowerMenu').animate({opacity:0},0);
     },()=>{
-      // $("#"+$.idSecondMenu+"Fn").css({
-      //   'opacity':'0',
-      //   'z-index': '-1'
-      // });
+      $("#"+$.idOptionSecondMenu+"Fn").css({
+        'opacity':'0',
+        'z-index': '-1'
+      });
       $('#borderFollowerMenu').animate({opacity:1},0);
     });
+    content = "";
   }
-  //End function secondMenu
   //Create content function preview
   if($.settings.activatePreview){
     $.settings.optionsMenu.forEach((option)=>{
       if(option.functionName=="preview"){
-        content = "<div class='previewFunction' id='"+option.optionName+"Fn'><img id='imgPreview' src='"+option.functionData+"'></div>";
+        content = "<div class='previewFunction' id='"+option.optionName+"Fn'><img class='img-fluid' id='imgPreview' src='"+option.functionData+"'></div>";
         $("#followerMenuOptionsDeployed").append(content);
         content="";
       }
@@ -247,14 +301,14 @@ $.ventana_alto = $(window).height();
     });
   }
   //Create content function slide
+  $.countImages=0;
   if($.settings.activateSlide){
     $.settings.optionsMenu.forEach((option)=>{
-      var i=0;
       if(option.functionName=="imagesSlide"){
-        content = "<div class='imagesSlideContainer' id='"+option.functionName+"Fn'>";
+        content = "<div id='"+option.optionName+"Fn' class='imagesSlideContainer'><a id ='chevron-left'><i class='fa fa-chevron-left'></i></a><a id ='chevron-right'><i class='fa fa-chevron-right'></i></a>";
         option.functionData.forEach((a)=>{
-          content += "<div class='imageSlide' id='imageSlide"+i+"'><img src='"+a.imagePath+"'><div class='textSlide'><h3 class='titleSlide'>"+a.titleSlide+"</h3><p class='textSlide'>"+a.textSlide+"</p> </div></div>";
-          i++;
+          content += "<div class='imageSlide' id='imageSlide"+$.countImages+"'><img src='"+a.imagePath+"'><div class='textSlide'><h3 class='titleSlide'>"+a.titleSlide+"</h3><p>"+a.textSlide+"</p></div></div>";
+          $.countImages++;
         });
         content += "</div>";
         $("#followerMenuOptionsDeployed").append(content);
@@ -265,14 +319,79 @@ $.ventana_alto = $(window).height();
           if(second.functionName=="imagesSlide"){
             content = "<div class='imagesSlide secondMenuSlide' id='"+option.functionName+"Fn'>";
             second.functionData.forEach((a)=>{
-              content += "<div class='imageSlide' id='imageSlide"+i+"'><img src='"+a.imagePath+"'><div class='textSlide'><h3 class='titleSlide'>"+a.titleSlide+"</h3><p class='textSlide'>"+a.textSlide+"</p> </div></div>";
-              i++;
+              content += "<div class='imageSlide'><img src='"+a.imagePath+"'><div class='textSlide'><h3 class='titleSlide'>"+a.titleSlide+"</h3><p>"+a.textSlide+"</p></div></div>";
             });
             content += "</div>";
             $("#secondMenuContainer").append(content);
           }
         });
       }
+    });
+    $('.imageSlide .textSlide').hide();
+    //Hover function slide
+    $('.imagesSlide').hover((element)=>{
+      $.idSlide = element.target.id;
+      console.log($.idSlide);
+      $("#"+$.idSlide+"Fn").css({
+        'opacity':'1',
+        'height': '330px',
+        'z-index': '1'
+      });
+      //Slide images with timeout
+      $.slideTimeout = setInterval(slideTimeoutF, 3000);
+      function slideTimeoutF(){
+        console.log($.slideImagePx+' time');
+        if($.countImages>=$.countImagesFinal){
+          $.slideImagePx=$.slideImagePx-550;
+          $('.imageSlide').css({
+            'transform':'translateX('+$.slideImagePx+'px)',
+            'transition':'all linear .5s'
+          });
+          $.countImagesFinal++;
+          $.imageCurrent++;
+          $("#imageSlide"+$.imageCurrent+" .textSlide").delay(1500).show('slow');
+        }
+      }
+
+      $("#imageSlide"+$.imageCurrent+" .textSlide").delay(1000).show('slow');
+      //show text slide
+      // imageSlideElement=$(".imageSlide");
+      // imageSlideElement.each((element)=>{
+      //   console.log(imageSlideElement[element].id);
+      //   $("#"+imageSlideElement[element].id+" .textSlide").delay($.time).show('slow');
+      //   $("#"+imageSlideElement[element].id+" .textSlide");
+      //   $.time=$.time+3000;
+      // });
+
+      //Slide images with click
+      $('#chevron-right').click(()=>{
+        console.log($.slideImagePx+' click');
+        clearInterval($.slideTimeout);
+        slideTimeoutF();
+        $.slideTimeout = setInterval(slideTimeoutF, 3000);
+      });
+      $('#chevron-left').click(()=>{
+        clearInterval($.slideTimeout);
+        if($.countImagesFinal>=3){
+          $.slideImagePx=$.slideImagePx+550;
+          $('.imageSlide').css({
+            'transform':'translateX('+$.slideImagePx+'px)',
+            'transition':'all linear .5s'
+          });
+          $.countImagesFinal--;
+          $.imageCurrent--;
+        }
+        $.slideTimeout = setInterval(slideTimeoutF, 3000);
+      });
+      $('#borderFollowerMenu').animate({opacity:0},0);
+    },()=>{
+      $("#"+$.idSlide+"Fn").css({
+        opacity:0,
+        height: '0',
+        'z-index': '0'
+      });
+      clearInterval($.slideTimeout);
+      $('#borderFollowerMenu').animate({opacity:1},0);
     });
   }
   //Call function slide Menu
@@ -310,14 +429,7 @@ $.ventana_alto = $(window).height();
     $.callback=!$.callback;
     slideMenu('left','right');
   });
-  //Hover function Slide
-  $('.imagesSlide').hover(()=>{
-    var idSlide = $(this).attr("id");
-    $(idSlide+"Fn").css({
-      //Poner contenido visible
-    });
-  });
-  //End function imagesSlide
+
   //Create content grid
   if($.settings.activateGrid){
     $.settings.optionsMenu.forEach((option)=>{
@@ -399,9 +511,9 @@ $.ventana_alto = $(window).height();
     $.settings.optionsMenu.forEach((option)=>{
       var i=0;
       if(option.functionName=="workTeam"){
-        content = "<div class='workTeamContainer' id='"+option.optionName+"Fn'>";
+        content = "<div class='workTeamContainer row' id='"+option.optionName+"Fn'>";
         option.functionData.forEach((a)=>{
-          content += "<div class='employedTeam' id='employedTeam"+i+"'><img src='"+a.imagePath+"'><div class='textTeam'><h3 class='employedName'>"+a.employedName+"</h3><p class='employedRoll'>"+a.employedRoll+"</p> </div></div>";
+          content += "<div class='employedTeam col-sm-4' id='employedTeam"+i+"'><img class='img-fluid' src='"+a.imagePath+"'><div class='textTeam' id='employedTeam"+i+"'><h5 class='employedName'>"+a.employedName+"</h5><p class='employedRoll'>"+a.employedRoll+"</p> </div></div>";
           i++;
         });
         content += "</div>";
@@ -410,9 +522,9 @@ $.ventana_alto = $(window).height();
       if(option.functionName=="secondMenu"){
         option.functionData.forEach((second)=>{
           if(second.functionName=="workTeam"){
-            content = "<div class='workTeam secondMenuSlide' id='"+option.functionName+"Fn'>";
+            content = "<div class='workTeamContainer row' id='"+option.functionName+"Fn'>";
             second.functionData.forEach((a)=>{
-              content += "<div class='employedTeam' id='employedTeam"+i+"'><img src='"+a.imagePath+"'><div class='textTeam'><h3 class='employedName'>"+a.employedName+"</h3><p class='employedRoll'>"+a.employedRoll+"</p> </div></div>";
+              content += "<div class='employedTeam col-sm-4' id='employedTeam"+i+"'><img  src='"+a.imagePath+"'><div class='textTeam'><h5 class='employedName'>"+a.employedName+"</h5><p class='employedRoll'>"+a.employedRoll+"</p> </div></div>";
               i++;
             });
             content += "</div>";
@@ -422,11 +534,29 @@ $.ventana_alto = $(window).height();
         });
       }
     });
+    //Hidden work function
+    $('.workTeamContainer .textTeam').slideUp();
     //Hover function workTeam
-    $('.workTeam').hover(()=>{
-      var idWorkTeam = $(this).attr("id");
-      $(idWorkTeam+"Fn").css({
-        //Poner contenido visible
+    $('.workTeam').hover((element)=>{
+      $.idWorkTeam = element.target.id;
+      $("#"+$.idWorkTeam+"Fn").css({
+        'opacity':'1',
+        'height': '330px',
+        'z-index': '1',
+      });
+      var time=500;
+      var elementEmployed=[];
+      elementEmployed=$("#"+$.idWorkTeam+"Fn .employedTeam");
+      elementEmployed.each((employed)=>{
+        $("#"+$.idWorkTeam+"Fn #"+elementEmployed[employed].id+" #employedTeam"+employed).delay(time).slideDown('slow');
+        time=time+100;
+      });
+    },
+    ()=>{
+      $("#"+$.idWorkTeam+"Fn").css({
+        'opacity':'0',
+        'height': '0',
+        'z-index': '0',
       });
     });
   }
@@ -590,8 +720,8 @@ $(document).mousemove(function(event){
       }
     }
   }
-  if($.parallaxElement!=undefined){
-    parallaxEfect($.parallaxElement);
+  if($.idSecondMenu!=undefined){
+    parallaxEfect($.idSecondMenu);
   }
 
 });
@@ -603,6 +733,9 @@ function slideMenu(side, otherSide){
   $('.previewFunction').addClass(side).removeClass(otherSide);
   $('#mega-menu').addClass(side).removeClass(otherSide);
   $("#menu-flotante-"+side).show().addClass(side);
+  if($.settings.activateTeam){
+    $(".workTeamContainer").addClass(side).removeClass(otherSide);
+  }
   //Action if button is press or not
   if($.switch){
     $("#followerMenuOptionsDeployed, #borderFollowerMenu").css({
@@ -620,10 +753,12 @@ function slideMenu(side, otherSide){
     }
     $('#search-menu-left, #login-menu-left').css({
       'left':LoginButtonsDeployedLeft,
+      opacity:1,
       'transition':'all .3s linear'
     });
     $('#search-menu-right, #login-menu-right').css({
       'right':LoginButtonsDeployedRight,
+      opacity:1,
       'transition':'all .3s linear'
     });
   }
@@ -658,10 +793,12 @@ function slideMenu(side, otherSide){
     });
     $('#search-menu-left, #login-menu-left').css({
       'left':LoginButtonsDeployedLeft,
+      opacity:'',
       'transition':'all .3s linear'
     });
     $('#search-menu-right, #login-menu-right').css({
       'right':LoginButtonsDeployedRight,
+      opacity:'',
       'transition':'all .3s linear'
     });
   }
@@ -699,16 +836,17 @@ function showButtonMenu(side, otherSide){
 //Pendiente de comprobar si se usa, creo que no
 //llamando funcion de movimiento fuera del mousemove
 function parallaxEfect(element){
+  $.widthSecondOptions = $('#'+element+'Ul').attr('sizedata');
 if($.side=="right"){
-  element.addClass('rightSecondOptions').removeClass('leftSecondOptions');
+  $('#'+element+'Fn').css({'right':'0'});
+  $('#'+element+'Ul').addClass('rightSecondOptions');
   var z;
   var y;
   var xy;
   var maxDesployer = $.widthSecondOptions-420;
   var anchoVentana = $(window).width(); // Ancho de la ventana para calcular el el Parallax inverso
   if($.widthSecondOptions>480){ //Saber el tamaño de la lista para establecer la velocidad de desplazamiento
-    $('.parallaxSecond').each(function(){
-      var $this1 = $(this);
+      var $this1 = $('#'+element+'Ul');
       if (position>(anchoVentana-150)) { //Establecer moviento en 0 si no ha pasado de los 150px
         z=0;
       }else if(position<(anchoVentana-150)){ // Establecer moviento del parallax despues de los 150px
@@ -730,10 +868,13 @@ if($.side=="right"){
         xy =  y + 'px';
         $this1.css({ 'transform':'translateX('+xy+')'});
       }
-    });
   }
 }else if($.side=="left"){
-  element.removeClass('rightSecondOptions');
+  $('#'+element+'Ul').removeClass('rightSecondOptions');
+  $('#'+element+'Fn').css({
+    'right':'',
+    'left':'0'
+  });
   var z;
   var y;
   var xy;
@@ -767,15 +908,3 @@ if($.side=="right"){
   }
 }
 }
-
-//Click fuera del menu, pendiente a optimizar
-$('body').click(()=>{
-  if($.switch==true){
-    $.switch=false;
-    $("#menuDesplegado").css({
-      'width':"0px",
-      'opacity':'0',
-      'transition':'all .3s linear'
-    });
-  }
-});
