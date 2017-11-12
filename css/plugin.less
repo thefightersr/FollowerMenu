@@ -254,6 +254,7 @@ ul#followerMenuOptions{
   .containerUlSecondMenu{
     background: white;
     //#f2f2f2;
+    border-bottom: #FF9985 solid 1px;
     right: 0;
   }
   ul.parallaxSecond{
@@ -414,16 +415,41 @@ ul#followerMenuOptions{
   width: 550px;
   height: 330px;
   overflow: hidden;
+  background-color: white;
   .mainContainerClass{
     display: grid;
     flex-wrap: wrap;
     grid-template-columns:110px 110px 110px 110px 110px;
     width: 550px;
     .imageBanner{
+      a{
+        text-decoration: none;
+      }
+      overflow: hidden;
+      width: 220px;
+      height: 290px;
+      max-height: 290px;
+      // border: solid 1px black;
       grid-column: 1 / span 2 ;
       grid-row: 1/ span 2;
-      img{
-        width: 220px;
+      .discount{
+        padding: .6rem;
+        background-color: fadeout(red, 55%);
+        color:white;
+      }
+      .bannerTitle{
+        margin: 110px 0 20px 0;
+        width: 200px;
+        background-color: fadeout(white, 70%);
+        border: fadeout(black, 30%) solid 1px;
+      } p{
+        padding: .6rem .6rem 1.6rem;
+        margin: 0;
+        color: #00334e;
+        transition: all linear .3s;
+        &:hover{
+          color:white;
+        }
       }
     }
     .tagsContainerClass{
@@ -448,13 +474,17 @@ ul#followerMenuOptions{
         margin: 0;
         padding: 0;
         width: 165px;
-        li{
+        a{
           color: #6a737b;
           font-size: .8rem;
           margin-right: 15px;
           margin-bottom: 10px;
+          transition: all linear .2s;
+          text-decoration: none;
+
           &:hover{
             color: black;
+            transition: all linear .2s;
           }
         }
       }
@@ -462,21 +492,45 @@ ul#followerMenuOptions{
     .itemsContainerClass{
       grid-column: 3 / span 5;
       height: 50%;
+      z-index: 1;
       .itemShopClass{
         float: left;
         width: 107px;
         height: 140px;
+        overflow: hidden;
         margin: 0 1px;
         border-right: solid 1px #FF9985;
         border-bottom: solid 1px #FF9985;
+        &:hover .pItem{
+          color:black;
+        }
+        .itemImage{
+          max-height: 100px;
+          overflow: hidden;
+        }
+        &:hover img{
+          transform: scale(1.1);
+
+        }
         img{
-          height: 110px;
+          height: 100px;
+          transition: all linear .2s;
         }
         .textItem{
           padding-bottom: 5px;
+          z-index: 1;
+          background-color: white;
         }
         p{
+          color:darken(white,70%);
+          font-size: 12px;
+          max-height: 16px;
+          margin: 0;
+          overflow: hidden;
           text-align: center;
+        }
+        a{
+          text-decoration: none;
         }
         i{
           color: darken(red, 7%);
@@ -523,10 +577,35 @@ ul#followerMenuOptions{
     li{
       padding:0 5px;
       border: 1px solid black;
+      overflow: hidden;
+      display: inline-block;
+      transform: perspective(1px) translateZ(0);
+      vertical-align: middle;
+      transition: all linear .2s;
+      margin-right: 1px;
       &:hover{
         cursor: pointer;
-        background-color: black;
         color: white;
+        transition: all linear .2s;
+      }
+
+      &:hover::before{
+        transition:all linear .2s;
+        width: 100%;
+        transform: scaleX(1);
+      }
+      &:before{
+        content:'';
+        position: absolute;
+        transform-origin: 0 50%;
+        transform: scaleX(0);
+        transition-property: transform;
+        left: 0;
+        background-color: black;
+        width: 0;
+        z-index: -1;
+        transition: all linear .2s;
+        height: 26px;
       }
     }
   }
@@ -605,7 +684,7 @@ ul#followerMenuOptions{
       transform: perspective(1px) translateZ(0);
       box-shadow: 0 0 1px transparent;
       position: relative;
-      background: darken(#FF9985,10%);
+      background: white;
       transition-property: color;
       transition-duration: 0.2s;
     }
@@ -617,7 +696,7 @@ ul#followerMenuOptions{
       bottom: 0;
       left: 0;
       right: 0;
-      background:#FF9985 ;
+      background:white;
       transform: scaleX(1);
       transform-origin: 50%;
       transition-property: transform;
@@ -629,6 +708,48 @@ ul#followerMenuOptions{
     }
     .hvr-shutter-in-horizontal:hover:before, .hvr-shutter-in-horizontal:focus:before, .hvr-shutter-in-horizontal:active:before {
       transform: scaleX(0);
+    }
+    /* Bounce To Right */
+    .hvr-bounce-to-right {
+      display: inline-block;
+      vertical-align: middle;
+      -webkit-transform: perspective(1px) translateZ(0);
+      transform: perspective(1px) translateZ(0);
+      box-shadow: 0 0 1px transparent;
+      position: relative;
+      -webkit-transition-property: color;
+      transition-property: color;
+      -webkit-transition-duration: 0.5s;
+      transition-duration: 0.5s;
+    }
+    .hvr-bounce-to-right:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: fadeout(black, 30%);
+      -webkit-transform: scaleX(0);
+      transform: scaleX(0);
+      -webkit-transform-origin: 0 50%;
+      transform-origin: 0 50%;
+      -webkit-transition-property: transform;
+      transition-property: transform;
+      -webkit-transition-duration: 0.5s;
+      transition-duration: 0.5s;
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out;
+    }
+    .hvr-bounce-to-right:hover, .hvr-bounce-to-right:focus, .hvr-bounce-to-right:active {
+      color: white;
+    }
+    .hvr-bounce-to-right:hover:before, .hvr-bounce-to-right:focus:before, .hvr-bounce-to-right:active:before {
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1);
+      -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+      transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
     }
 
 

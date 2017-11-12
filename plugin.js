@@ -151,7 +151,7 @@ $.ventana_alto = $(window).height();
         $('#followerMenuOptionsDeployed').append(content);
         option.functionData.forEach((b)=>{
           i++;
-          if(i==1){var color1='black'; var color2='white'}
+          if(i==1){var color1='black'; var color2 ='white'}
           content = "<li style='background-color:"+color1+"; color:"+color2+"' id='"+b.tabTitle+"' class='tabsOptionClass'>"+b.tabTitle+"</li>";
           $('#'+option.optionName+'Fn ul.tabsClass').append(content);
           content = "<div id='"+b.tabTitle+"Tab' class='mainContainerClass hideItem'>";
@@ -160,12 +160,12 @@ $.ventana_alto = $(window).height();
             switch (tab.colFunction){
               case 'imageBanner':
                 if(tab.colSide=='right'){ side='right'}
-                content += "<div class='imageBanner "+side+"Banner'><img class='imgBanner' src='"+tab.colData+"'></div>";
+                content += "<div class='imageBanner "+side+"Banner' style='background:url("+tab.colData+") center;background-size: 220px 290px;'><a href='"+tab.bannerHref+"'><div class='bannerTitle hvr-bounce-to-right'><p>"+tab.colTitle+"</p></div></a><a href='"+tab.bannerHref+"'><span class='discount'>"+tab.discount+"</span></a></div>";
                 break;
               case 'itemsShop':
                 content += "<div class='itemsContainerClass "+side+"Item'>";
                 tab.colData.forEach((item)=>{
-                  content += "<div class='itemShopClass'><img class='img-fluid' src='"+item.imagePath+"' class='itemImage'><div class='textItem'><p>"+item.priceItem+" <i class='fa fa-shopping-cart'></i></p></div></div>"
+                  content += "<div class='itemShopClass'><div class='itemImage'><a  href='"+item.itemHref+"'><img class='img-fluid' src='"+item.imagePath+"'></a></div><div class='textItem'><a href='"+item.itemHref+"'><p class='pItem'>"+item.itemDescription+"</p></a><p class='pItem'>"+item.priceItem+"</p></div></div>"
                 });
                 content += "</div>";
                 break;
@@ -174,7 +174,7 @@ $.ventana_alto = $(window).height();
                 var i=0;
                 tab.colData.forEach((item)=>{
                   i++;
-                  content += "<li class='itemTagClass'>"+item.titleTag+"</li>"
+                  content += "<li class='itemTagClass'><a href='"+item.tagHref+"'>"+item.titleTag+"</a></li>"
                   if(i==4){
                     content += "</ul><ul>";
                     i=0;
