@@ -274,12 +274,10 @@ ul#followerMenuOptions li {
   opacity: 0;
   overflow-x: hidden;
   overflow-y: hidden;
-  overflow: hidden;
   max-height: 330px;
-  width: 550px ;
+  width: 550px !important;
   padding: 0px 5px !important;
   background: #f2f2f2;
-  border: solid 1px #c1d82f;
   border-bottom: solid 9px #c1d82f;
   -webkit-transition: all linear .3s;
   transition: all linear .3s;
@@ -294,8 +292,6 @@ ul#followerMenuOptions li {
   padding: 3px;
 }
 #secondMenuContainer {
-  overflow: hidden;
-  border: solid 1px #c1d82f;
   position: fixed !important;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
@@ -306,7 +302,7 @@ ul#followerMenuOptions li {
   overflow-x: hidden;
   overflow-y: hidden;
   max-height: 330px;
-  width: 550px;
+  width: 550px !important;
   background: #f2f2f2;
   border-bottom: solid 9px #c1d82f;
   -webkit-transition: all linear .3s;
@@ -381,7 +377,6 @@ ul#followerMenuOptions li {
   width: 550px;
   height: 0;
   overflow: hidden;
-  border: solid 1px #c1d82f;
   background: #ccc;
   -webkit-transition: all linear .3s;
   transition: all linear .3s;
@@ -440,7 +435,6 @@ ul#followerMenuOptions li {
   opacity: 0;
   width: 550px;
   height: 0;
-  border: 1px solid #c1d82f;
   border-bottom: solid 9px #c1d82f;
   overflow: hidden;
   -webkit-transition: all linear .3s;
@@ -488,12 +482,9 @@ ul#followerMenuOptions li {
   border: solid 1px #c1d82f;
   border-bottom: solid 9px #c1d82f ;
   width: 550px;
-  height: 0;
+  height: 330px;
   overflow: hidden;
-  opacity: 0;
   background-color: white;
-  -webkit-transition: all linear .3s;
-  transition: all linear .3s;
 }
 .shopClass .mainContainerClass {
   display: grid;
@@ -713,130 +704,6 @@ ul#followerMenuOptions li {
   -webkit-transition: all linear .2s;
   transition: all linear .2s;
   height: 26px;
-}
-.contactClass {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: fixed;
-  opacity: 1;
-  height: 0;
-  overflow: hidden;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  width: 550px;
-  top: 57%;
-  border: solid 1px #c1d82f;
-  background-color: black;
-  border-bottom: 7px solid #c1d82f;
-  -webkit-transition: all linear .3s;
-  transition: all linear .3s;
-  z-index: 0;
-  opacity: 0;
-}
-.contactClass form {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 0 8px 8px 8px;
-  border-left: 2px solid #ff846b;
-}
-.contactClass form input,
-.contactClass form textarea {
-  border-top: 0;
-  border-right: 0;
-  border-bottom: 3px solid #c1d82f;
-  border-left: 3px solid transparent;
-  -webkit-transition: all linear .5s;
-  transition: all linear .5s;
-  -webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1), 0 0 16px rgba(0, 0, 0, 0.1);
-          box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1), 0 0 16px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.5);
-  margin: 0 0 10px 0;
-}
-.contactClass form input:focus,
-.contactClass form textarea:focus {
-  border-bottom: 3px solid #ff7f66;
-  border-left: 3px solid #ff8c76;
-}
-.contactClass form #reset {
-  float: left;
-}
-.contactClass form #reset:hover {
-  border-bottom: 3px solid #cc0000;
-  border-left: 3px solid #e60000;
-}
-.contactClass form button,
-.contactClass form button:focus,
-.contactClass form button:visited,
-.contactClass form button:active {
-  float: right;
-  margin: 0;
-  padding: 5px;
-  border-right: 0;
-  border-top: 0;
-  border-bottom: 3px solid #c1d82f;
-  border-left: 3px solid transparent;
-  background-color: transparent;
-  -webkit-transition: all linear .5s;
-  transition: all linear .5s;
-  -webkit-box-shadow: 0 0 0 0 transparent;
-          box-shadow: 0 0 0 0 transparent;
-}
-.contactClass form button:hover,
-.contactClass form button:focus:hover,
-.contactClass form button:visited:hover,
-.contactClass form button:active:hover {
-  -webkit-transition: all linear .5s;
-  transition: all linear .5s;
-  background-color: #cccccc;
-  color: #595959;
-  border-bottom: 3px solid #ff7f66;
-  border-left: 3px solid #ff8c76;
-}
-.contactClass form h6 {
-  text-align: center;
-  top: 0;
-  background: rgba(255, 136, 113, 0.94);
-  color: #f2f2f2;
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  padding: 10px 0;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-.contactClass #map {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-  border-right: 2px solid #ff846b;
-  background: white;
-}
-.contactClass #map #textMap {
-  position: absolute;
-  width: 260px;
-  height: 90px;
-  bottom: 0;
-  padding-top: 5px;
-  margin-left: 6px;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-  background-color: rgba(219, 105, 84, 0.85);
-}
-.contactClass #map #textMap ul {
-  list-style: none;
-}
-.contactClass #map #textMap ul li {
-  color: white;
-}
-.contactClass #map #textMap ul li i {
-  margin-right: 10px;
-}
-.contactClass #map img {
-  z-index: -1;
 }
 #GRIDFn p {
   padding: 5px 0;

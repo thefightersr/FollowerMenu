@@ -231,12 +231,10 @@ ul#followerMenuOptions{
   opacity: 0;
   overflow-x: hidden;
   overflow-y: hidden;
-  overflow: hidden;
   max-height: 330px;
-  width: 550px ;
+  width: 550px !important;
   padding: 0px 5px !important;
   background: darken(white, 5%);
-  border: solid 1px #c1d82f;
   border-bottom: solid 9px #c1d82f;
   transition: all linear .3s;
   .content{
@@ -253,10 +251,9 @@ ul#followerMenuOptions{
 }
 
 #secondMenuContainer{
-  overflow: hidden;
-  border: solid 1px #c1d82f;
   .containerUlSecondMenu{
     background: white;
+    //#f2f2f2;
     border-bottom: #FF9985 solid 1px;
     right: 0;
   }
@@ -290,7 +287,7 @@ ul#followerMenuOptions{
   overflow-x: hidden;
   overflow-y: hidden;
   max-height: 330px;
-  width: 550px;
+  width: 550px !important;
   background: darken(white, 5%);
   border-bottom: solid 9px #c1d82f;
   transition: all linear .3s;
@@ -321,7 +318,6 @@ ul#followerMenuOptions{
   width: 550px;
   height: 0;
   overflow: hidden;
-  border: solid 1px #c1d82f;
   background: #ccc;
   transition: all linear .3s;
   margin-left: 0;
@@ -373,7 +369,6 @@ ul#followerMenuOptions{
       opacity: 0;
       width: 550px;
       height: 0;
-      border:1px solid #c1d82f;
       border-bottom: solid 9px #c1d82f;
       overflow: hidden;
       transition: all linear .3s;
@@ -418,11 +413,9 @@ ul#followerMenuOptions{
   border: solid 1px #c1d82f;
   border-bottom: solid 9px #c1d82f ;
   width: 550px;
-  height: 0;
+  height: 330px;
   overflow: hidden;
-  opacity: 0;
   background-color: white;
-  transition: all linear .3s;
   .mainContainerClass{
     display: grid;
     flex-wrap: wrap;
@@ -617,116 +610,6 @@ ul#followerMenuOptions{
     }
   }
 }
-//Inicio Contacto
-  .contactClass{
-    display: flex;
-    position: fixed;
-    opacity: 1;
-    height: 0;
-    overflow: hidden;
-    justify-content: space-between;
-    width: 550px;
-    top:57%;
-    border: solid 1px #c1d82f;
-    background-color: black;
-    border-bottom: 7px solid #c1d82f;
-    transition: all linear .3s;
-    z-index: 0;
-    opacity: 0;
-    form{
-      flex: 1 1 auto;
-      background: fadeout(white, 40%);
-      padding:0 8px 8px 8px;
-      border-left: 2px solid darken(#FF9985, 5%);
-      input, textarea {
-        border-top: 0;
-        border-right: 0;
-        border-bottom: 3px solid #c1d82f;
-        border-left: 3px solid transparent;
-        transition: all linear .5s;
-        box-shadow:
-          inset 0 0 8px  rgba(0,0,0,0.1),
-                0 0 16px rgba(0,0,0,0.1);
-        padding: 10px;
-        background: rgba(255,255,255,0.5);
-        margin: 0 0 10px 0;
-        &:focus{
-          border-bottom: 3px solid darken(#FF9985, 6%);
-          border-left: 3px solid darken(#FF9985, 3%);
-          // color:darken(#FF9985, 5%);
-        }
-        &::-webkit-input-placeholder {
-          // color: #c1d82f;
-        }
-      }
-      #reset{
-        float:left;
-        &:hover{
-          border-bottom: 3px solid darken(red, 10%);
-          border-left: 3px solid darken(red, 5%);
-        }
-      }
-      button, button:focus, button:visited, button:active{
-        float:right;
-        margin: 0;
-        padding: 5px;
-        border-right: 0;
-        border-top: 0;
-        border-bottom: 3px solid #c1d82f;
-        border-left: 3px solid transparent;
-        background-color: transparent;
-        transition: all linear .5s;
-        box-shadow: 0 0 0 0 transparent;
-        &:hover{
-          transition: all linear .5s;
-          background-color: darken(white, 20%);
-          color:darken(white, 65%);
-          border-bottom: 3px solid darken(#FF9985, 6%);
-          border-left: 3px solid darken(#FF9985, 3%);
-        }
-      }
-      h6{
-        text-align: center;
-        top:0;
-        background: fadeout(darken(#FF9985, 4%), 6%);
-        color: darken(white, 5%);
-        margin-top: 0;
-        margin-bottom: 1.5rem;
-        padding: 10px 0;
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 5px;
-      }
-    }
-    #map{
-      flex: 1 1 auto;
-      border-right: 2px solid darken(#FF9985, 5%);
-      background: white;
-      #textMap{
-        position: absolute;
-        width: 260px;
-        height: 90px;
-        bottom: 0;
-        padding-top: 5px;
-        margin-left: 6px;
-        border-top-right-radius: 5px;
-        border-top-left-radius: 5px;
-        background-color: fadeout(darken(#DB6954, 0%),15%);
-        ul{
-          list-style: none;
-          li{
-            color:white;
-            i{
-              margin-right: 10px;
-
-            }
-          }
-        }
-      }
-      img{
-        z-index: -1;
-      }
-    }
-  }
 //Solo para demo
     #GRIDFn{
       p{
