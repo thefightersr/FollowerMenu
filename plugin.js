@@ -96,13 +96,12 @@ $.ventana_alto = $(window).height();
   if(true){
     content = "<div id='followerMenuContainer'>";
     content += "<div id='followerMenuOptionsDeployed'>";
-    content += "<div id='secondMenuContainer'></div>";
-    content += "<ul id='followerMenuOptions' class='parallax'><ul>";
-    content += "<i id='followerMenuArrow' class='fa fa-sort-desc'></i>";
     //Create container secondMenu
     if($.settings.activateSecondMenu){
-      content += "<div id='secondMenuContainer'></div>"
+      content += "<div id='secondMenuContainer' class='functionFollower'></div>"
     }
+    content += "<ul id='followerMenuOptions' class='parallax'><ul>";
+    content += "<i id='followerMenuArrow' class='fa fa-sort-desc'></i>";
     content += "</div>"; //Close tag followerMenuOptionsDeployed
     content += "<div id='borderFollowerMenu'></div>";
     content += "<i id='search-menu-left' class='fa fa-search'></i>";
@@ -129,7 +128,7 @@ $.ventana_alto = $(window).height();
       content = "";
       var count=0;
         if(option.functionName=="secondMenu"){
-          content += "<div id='"+option.optionName+"Fn' style='position:absolute' class='containerUlSecondMenu'><ul class='parallaxSecond' id='"+option.optionName+"Ul'></ul></div>";
+          content += "<div id='"+option.optionName+"Fn' style='position:absolute' class='containerUlSecondMenu '><ul class='parallaxSecond' id='"+option.optionName+"Ul'></ul></div>";
           $("#secondMenuContainer").append(content);
           $.widthSecondOptions=0;
           contentSecond = "";
@@ -143,11 +142,12 @@ $.ventana_alto = $(window).height();
         }
     }
     //End function secondMenu
+    //Create content Shop
     if($.settings.activateShop){
       content="";
       var i=0;
       if(option.functionName=="shop"){
-        content = "<div id='"+option.optionName+"Fn' class='shopClass'><ul class='tabsClass'></ul></div>";
+        content = "<div id='"+option.optionName+"Fn' class='shopClass functionFollower'><ul class='tabsClass'></ul></div>";
         $('#followerMenuOptionsDeployed').append(content);
         option.functionData.forEach((b)=>{
           i++;
@@ -189,10 +189,75 @@ $.ventana_alto = $(window).height();
         })
       }
     }
-
+    //Create content Contact
+    if($.settings.activateContact){
+      content = "";
+      if(option.functionName=='contact'){
+        content += "<div id='"+option.optionName+"Fn' class='contactClass functionFollower'>";
+  	    content += "<div id='map' class='map'><div id='textMap'><ul><li><i class='fa "+option.functionData.mapData.iconEmail+"'></i>"+option.functionData.mapData.mapEmail+"</li><li ><i class='fa "+option.functionData.mapData.iconAddress+"'></i>"+option.functionData.mapData.mapAddress+"</li><li><i  class='fa "+option.functionData.mapData.iconTel+"'></i>"+option.functionData.mapData.mapTel+"</li></ul></div>";
+  			content += "<img src='"+option.functionData.mapImage+"' width='273' height='325' alt=''>";
+  	    content += "</div>";
+  		  content += "<form class=' action='"+option.destination+"' method='"+option.sendMethod+"'>";
+  			content += "<h6>"+option.functionData.principalMessage+"</h6>";
+  			content += "<div class='form-group'>";
+  		  content += "<input type='text' class='form-control' placeholder='"+option.functionData.areaEmail+"' id='correo'>";
+  			content += "</div>";
+  			content += "<div class='form-group'>";
+  		  content += "<textarea name='name' class='form-control' rows='5' placeholder='"+option.functionData.areaMessage+"' cols='32'></textarea>";
+  			content += "</div>";
+  			content += "<button type='reset' class='btn btn-success' name='button' id='reset'>Reset</button><button type='submit' class='btn btn-success' name='button'>Enviar</button>";
+  	    content += "</form>";
+        content += "</div>";
+        $('#followerMenuOptionsDeployed').append(content);
+      }
+    }
+    content="";
   });
-  content="";
+  if($.settings.activateContact){
+    $('.contact').hover((element)=>{
+      $('.functionFollower').css({
+        'opacity':'0',
+        'height': '0',
+        'z-index': '0'
+      });
+      $.idContact = element.target.id;
+      console.log($.idContact);
+      $("#"+$.idContact+'Fn').css({
+        'height':'330px',
+        'opacity':'1',
+        'z-index':'1'
+      })
+    },
+    ()=>{
+      // $("#"+$.idContact+'Fn').css({
+      //   'height':'0',
+      //   'opacity':'0',
+      //   'z-index':'0'
+      // })
+    });
+  }
   if($.settings.activateShop){
+    $('.shop').hover((element)=>{
+      $.idShop = element.target.id;
+      $('.functionFollower').css({
+        'opacity':'0',
+        'height': '0',
+        'z-index': '0'
+      });
+      console.log($.idShop);
+      $("#"+$.idShop+'Fn').css({
+        'height':'330px',
+        'opacity':'1',
+        'z-index':'1'
+      })
+    },
+    ()=>{
+      // $("#"+$.idShop+'Fn').css({
+      //   'height':'0',
+      //   'opacity':'0',
+      //   'z-index':'0'
+      // })
+    });
     $('.tabsOptionClass').click((element)=>{
       $('.tabsOptionClass').css({
         'background-color':'',
@@ -214,7 +279,17 @@ $.ventana_alto = $(window).height();
     //Deslizar contenido secondMenu
     $('.containerUlSecondMenu').hide('fast');
     $('.secondMenu').hover((element)=>{
+      // $('.functionFollower').css({
+      //   'opacity':'0',
+      //   'height': '0',
+      //   'z-index': '0'
+      // });
       $.idSecondMenu = element.target.id;
+      $('.functionFollower').css({
+        'opacity':'0',
+        'height': '0',
+        'z-index': '0'
+      });
       $("#secondMenuContainer").css({
         'opacity':'1',
         'height': '55px',
@@ -240,7 +315,7 @@ $.ventana_alto = $(window).height();
       $('ul.parallaxSecond').css({
         'z-index':'0'
       });
-      $('#borderFollowerMenu').animate({opacity:1},0);
+      // $('#borderFollowerMenu').animate({opacity:1},0);
     });
     //Deslizar contenido secondMenu
     $('.optionSecondMenu').hover((element)=>{
@@ -256,11 +331,11 @@ $.ventana_alto = $(window).height();
       });
       $('#borderFollowerMenu').animate({opacity:0},0);
     },()=>{
-      $("#"+$.idOptionSecondMenu+"Fn").css({
-        'opacity':'0',
-        'z-index': '-1'
-      });
-      $('#borderFollowerMenu').animate({opacity:1},0);
+      // $("#"+$.idOptionSecondMenu+"Fn").css({
+      //   'opacity':'0',
+      //   'z-index': '-1'
+      // });
+      // $('#borderFollowerMenu').animate({opacity:1},0);
     });
     content = "";
   }
@@ -268,14 +343,14 @@ $.ventana_alto = $(window).height();
   if($.settings.activatePreview){
     $.settings.optionsMenu.forEach((option)=>{
       if(option.functionName=="preview"){
-        content = "<div class='previewFunction' id='"+option.optionName+"Fn'><img class='img-fluid' id='imgPreview' src='"+option.functionData+"'></div>";
+        content = "<div class='previewFunction functionFollower' id='"+option.optionName+"Fn'><img class='img-fluid' id='imgPreview' src='"+option.functionData+"'></div>";
         $("#followerMenuOptionsDeployed").append(content);
         content="";
       }
       if(option.functionName=="secondMenu"){
         option.functionData.forEach((second)=>{
           if(second.functionName=="preview"){
-            content = "<div class='previewFunction previewFunctionSecond' id='"+second.optionName+"SecFn'><img id='imgPreview' src='"+second.functionData+"'></div>";
+            content = "<div class='previewFunction previewFunctionSecond ' id='"+second.optionName+"SecFn'><img id='imgPreview' src='"+second.functionData+"'></div>";
             $("#secondMenuContainer").append(content);
             content="";
           }
@@ -285,6 +360,11 @@ $.ventana_alto = $(window).height();
     //Hover function preview
     $('.preview').hover((element)=>{
       $.idPreview = element.target.id;
+      $('.functionFollower').css({
+        'opacity':'0',
+        'height': '0',
+        'z-index': '0'
+      });
       $("#"+$.idPreview+"Fn").css({
         'opacity':'1',
         'height': '330px',
@@ -305,7 +385,7 @@ $.ventana_alto = $(window).height();
   if($.settings.activateSlide){
     $.settings.optionsMenu.forEach((option)=>{
       if(option.functionName=="imagesSlide"){
-        content = "<div id='"+option.optionName+"Fn' class='imagesSlideContainer'><a id ='chevron-left'><i class='fa fa-chevron-left'></i></a><a id ='chevron-right'><i class='fa fa-chevron-right'></i></a>";
+        content = "<div id='"+option.optionName+"Fn' class='imagesSlideContainer functionFollower'><a id ='chevron-left'><i class='fa fa-chevron-left'></i></a><a id ='chevron-right'><i class='fa fa-chevron-right'></i></a>";
         option.functionData.forEach((a)=>{
           content += "<div class='imageSlide' id='imageSlide"+$.countImages+"'><img src='"+a.imagePath+"'><div class='textSlide'><h3 class='titleSlide'>"+a.titleSlide+"</h3><p>"+a.textSlide+"</p></div></div>";
           $.countImages++;
@@ -317,7 +397,7 @@ $.ventana_alto = $(window).height();
       if(option.functionName=="secondMenu"){
         option.functionData.forEach((second)=>{
           if(second.functionName=="imagesSlide"){
-            content = "<div class='imagesSlide secondMenuSlide' id='"+option.functionName+"Fn'>";
+            content = "<div class='imagesSlide secondMenuSlide ' id='"+option.functionName+"Fn'>";
             second.functionData.forEach((a)=>{
               content += "<div class='imageSlide'><img src='"+a.imagePath+"'><div class='textSlide'><h3 class='titleSlide'>"+a.titleSlide+"</h3><p>"+a.textSlide+"</p></div></div>";
             });
@@ -331,6 +411,11 @@ $.ventana_alto = $(window).height();
     //Hover function slide
     $('.imagesSlide').hover((element)=>{
       $.idSlide = element.target.id;
+      $('.functionFollower').css({
+        'opacity':'0',
+        'height': '0',
+        'z-index': '0'
+      });
       console.log($.idSlide);
       $("#"+$.idSlide+"Fn").css({
         'opacity':'1',
@@ -385,13 +470,13 @@ $.ventana_alto = $(window).height();
       });
       $('#borderFollowerMenu').animate({opacity:0},0);
     },()=>{
-      $("#"+$.idSlide+"Fn").css({
-        opacity:0,
-        height: '0',
-        'z-index': '0'
-      });
+      // $("#"+$.idSlide+"Fn").css({
+      //   opacity:0,
+      //   height: '0',
+      //   'z-index': '0'
+      // });
       clearInterval($.slideTimeout);
-      $('#borderFollowerMenu').animate({opacity:1},0);
+      // $('#borderFollowerMenu').animate({opacity:1},0);
     });
   }
   //Call function slide Menu
@@ -435,7 +520,7 @@ $.ventana_alto = $(window).height();
     $.settings.optionsMenu.forEach((option)=>{
       var i=0;
       if(option.functionName=="gridCamp"){
-        content = "<div class='gridCampContainer scrollbar container gridCamp' id='"+option.optionName+"Fn'>";
+        content = "<div class='gridCampContainer scrollbar container functionFollower' id='"+option.optionName+"Fn'>";
         option.functionData.forEach((a)=>{
           content += "<div class='row' id='gridRow"+i+"'>";
           a.row.forEach((b)=>{
@@ -457,7 +542,7 @@ $.ventana_alto = $(window).height();
       if(option.functionName=="secondMenu"){
         option.functionData.forEach((second)=>{
           if(second.functionName=="gridCamp"){
-            content = "<div class='gridCamp secondMenuGridCamp' id='"+option.functionName+"Fn'>";
+            content = "<div class='gridCamp secondMenuGridCamp ' id='"+option.functionName+"Fn'>";
             second.functionData.forEach((a)=>{
               content += "<div class='row' id='gridRow"+i+"'>";
               a.row.forEach((b)=>{
@@ -482,6 +567,11 @@ $.ventana_alto = $(window).height();
     //Hover function grid
     $('.gridCamp').hover((element)=>{
       $.idGridCamp = element.target.id;
+      $('.functionFollower').css({
+        'opacity':'0',
+        'height': '0',
+        'z-index': '0'
+      });
       $("#"+$.idGridCamp+"Fn").css({
         'opacity':'1',
         'height': '330px',
@@ -495,13 +585,13 @@ $.ventana_alto = $(window).height();
       }
       $('#borderFollowerMenu').animate({opacity:0},0);
     },()=>{
-      $("#"+$.idGridCamp+"Fn").css({
-        'opacity':'0',
-        'height': '0',
-        'z-index': '0',
-        'overflow-y': 'hidden'
-      });
-      $('#borderFollowerMenu').animate({opacity:1},0);
+      // $("#"+$.idGridCamp+"Fn").css({
+      //   'opacity':'0',
+      //   'height': '0',
+      //   'z-index': '0',
+      //   'overflow-y': 'hidden'
+      // });
+      // $('#borderFollowerMenu').animate({opacity:1},0);
     }
   );
   }
@@ -511,7 +601,7 @@ $.ventana_alto = $(window).height();
     $.settings.optionsMenu.forEach((option)=>{
       var i=0;
       if(option.functionName=="workTeam"){
-        content = "<div class='workTeamContainer row' id='"+option.optionName+"Fn'>";
+        content = "<div class='workTeamContainer row functionFollower' id='"+option.optionName+"Fn'>";
         option.functionData.forEach((a)=>{
           content += "<div class='employedTeam col-sm-4' id='employedTeam"+i+"'><img class='img-fluid' src='"+a.imagePath+"'><div class='textTeam' id='employedTeam"+i+"'><h5 class='employedName'>"+a.employedName+"</h5><p class='employedRoll'>"+a.employedRoll+"</p> </div></div>";
           i++;
@@ -522,7 +612,7 @@ $.ventana_alto = $(window).height();
       if(option.functionName=="secondMenu"){
         option.functionData.forEach((second)=>{
           if(second.functionName=="workTeam"){
-            content = "<div class='workTeamContainer row' id='"+option.functionName+"Fn'>";
+            content = "<div class='workTeamContainer row ' id='"+option.functionName+"Fn'>";
             second.functionData.forEach((a)=>{
               content += "<div class='employedTeam col-sm-4' id='employedTeam"+i+"'><img  src='"+a.imagePath+"'><div class='textTeam'><h5 class='employedName'>"+a.employedName+"</h5><p class='employedRoll'>"+a.employedRoll+"</p> </div></div>";
               i++;
@@ -539,6 +629,11 @@ $.ventana_alto = $(window).height();
     //Hover function workTeam
     $('.workTeam').hover((element)=>{
       $.idWorkTeam = element.target.id;
+      $('.functionFollower').css({
+        'opacity':'0',
+        'height': '0',
+        'z-index': '0'
+      });
       $("#"+$.idWorkTeam+"Fn").css({
         'opacity':'1',
         'height': '330px',
@@ -553,14 +648,48 @@ $.ventana_alto = $(window).height();
       });
     },
     ()=>{
-      $("#"+$.idWorkTeam+"Fn").css({
-        'opacity':'0',
-        'height': '0',
-        'z-index': '0',
-      });
+      // $("#"+$.idWorkTeam+"Fn").css({
+      //   'opacity':'0',
+      //   'height': '0',
+      //   'z-index': '0',
+      // });
     });
   }
   //End function imagesSlide
+  //Close all function
+  $("html").click(function() {
+    if($.switch){
+      $.switch=!$.switch;
+      if($.callback){
+        var setTime=setTimeout(opacity,300);
+        function opacity(){
+          $("#followerMenuButton-"+$.side).css({
+            opacity:''
+          })
+          delayHideButton=0;
+          $('.parallax').css({
+            'transform':'translateX(0)',
+          });
+        }
+        delayHideButton=300;
+      }
+      $('.functionFollower').css({
+        'opacity':'0',
+        'height': '0',
+        'z-index': '0',
+        'width':0,
+        'transition':'all linear .3s'
+      });
+      console.log(!$.switch);
+    $.callback=!$.callback;
+    slideMenu($.side, $.otherSide);
+    }
+
+});
+  $('#followerMenuOptionsDeployed, #followerMenuButton-left,#followerMenuButton-right ').click(function (e) {
+    console.log('klkl');
+    e.stopPropagation();
+});
   //ArrowMove
   $('#followerMenuOptions li').hover((elementObj)=>{
     $.element = elementObj.target.id;
@@ -582,6 +711,7 @@ $.ventana_alto = $(window).height();
 
 //Include all function of mousemove like parallax effect
 $(document).mousemove(function(event){
+  console.log($.side +' otro '+$.otherSide);
   position=event.pageX;
   if($.switch==false){
       //Mostrar boton menu izquierdo y ocuktar derecho
@@ -743,6 +873,10 @@ function slideMenu(side, otherSide){
       width:'550px',
       transition:'all linear .3s',
     });
+    $('.functionFollower').css({
+      width:'550px',
+      transition:'all linear .3s',
+    })
     $('#followerMenuButton-'+side).css({
       opacity:1
     })
@@ -763,11 +897,18 @@ function slideMenu(side, otherSide){
     });
   }
   else{
-      $("#followerMenuOptionsDeployed, #borderFollowerMenu").css({
-        width:'0px',
-        opacity:0.5,
-        transition:'all linear .3s',
-      });
+    //Hide function followerMenu
+    $("#followerMenuOptionsDeployed, #borderFollowerMenu").css({
+      width:'0px',
+      opacity:0.5,
+      transition:'all linear .3s',
+    });
+    $('.functionFollower').css({
+      width:'0',
+      height:'0',
+      opacity:0,
+      transition:'all linear .3s',
+    })
     if(side=='left'){
       LoginButtonsDeployedLeft=(marginSide+95)+'px';
     }else{
@@ -804,6 +945,47 @@ function slideMenu(side, otherSide){
   }
 }
 
+// //Hide function followerMenu
+// function hideFollowerMenu(){
+//   $("#followerMenuOptionsDeployed, #borderFollowerMenu").css({
+//     width:'0px',
+//     opacity:0.5,
+//     transition:'all linear .3s',
+//   });
+//   if($.side=='left'){
+//     $.LoginButtonsDeployedLeft=(marginSide+95)+'px';
+//   }else{
+//     $.LoginButtonsDeployedRight =(marginSide+95)+'px';
+//   }
+//   $('#img-preview').css({
+//     'border-bottom':'solid 0px #00BBFE',
+//   });
+//   $('#search-menu-'+$.side+', #login-menu-'+$.side).css({
+//     'margin':'',
+//     'transition':'all .3s linear'
+//   });
+//   $("#menuDesplegado").css({
+//     'width':"0px",
+//     'opacity':'0',
+//     'transition':'all .3s linear'
+//   });
+//   $("#menu-flotante-"+$.side).css({'box-shadow': '0px 0px 0px 0px #cc0000'})
+//   $("#img-preview").css({
+//     'width':"0px",
+//     'opacity':'0',
+//     'transition':'all .3s linear'
+//   });
+//   $('#search-menu-left, #login-menu-left').css({
+//     'left':$.LoginButtonsDeployedLeft,
+//     opacity:'',
+//     'transition':'all .3s linear'
+//   });
+//   $('#search-menu-right, #login-menu-right').css({
+//     'right':$.LoginButtonsDeployedRight,
+//     opacity:'',
+//     'transition':'all .3s linear'
+//   });
+// }
 //Ocultar Services
 function hiddenOpenMenus(){
     $('#mega-menu').css({
@@ -837,15 +1019,15 @@ function showButtonMenu(side, otherSide){
 //llamando funcion de movimiento fuera del mousemove
 function parallaxEfect(element){
   $.widthSecondOptions = $('#'+element+'Ul').attr('sizedata');
-if($.side=="right"){
-  $('#'+element+'Fn').css({'right':'0'});
-  $('#'+element+'Ul').addClass('rightSecondOptions');
-  var z;
-  var y;
-  var xy;
-  var maxDesployer = $.widthSecondOptions-420;
-  var anchoVentana = $(window).width(); // Ancho de la ventana para calcular el el Parallax inverso
-  if($.widthSecondOptions>480){ //Saber el tamaño de la lista para establecer la velocidad de desplazamiento
+  if($.side=="right"){
+    $('#'+element+'Fn').css({'right':'0'});
+    $('#'+element+'Ul').addClass('rightSecondOptions');
+    var z;
+    var y;
+    var xy;
+    var maxDesployer = $.widthSecondOptions-420;
+    var anchoVentana = $(window).width(); // Ancho de la ventana para calcular el el Parallax inverso
+    if($.widthSecondOptions>480){ //Saber el tamaño de la lista para establecer la velocidad de desplazamiento
       var $this1 = $('#'+element+'Ul');
       if (position>(anchoVentana-150)) { //Establecer moviento en 0 si no ha pasado de los 150px
         z=0;
@@ -870,41 +1052,41 @@ if($.side=="right"){
       }
   }
 }else if($.side=="left"){
-  $('#'+element+'Ul').removeClass('rightSecondOptions');
-  $('#'+element+'Fn').css({
-    'right':'',
-    'left':'0'
-  });
-  var z;
-  var y;
-  var xy;
-  var maxDesployer = $.widthSecondOptions-420;//La cantidad de pixels maxima que se recorrera el parallax
-  if($.widthSecondOptions>480){
-    $('.parallaxSecond').each(function(){
-      var $this1 = $(this);
-      if (position<150) {
-        z=0;
-      }else if(position>150){
-        count=position-145;
-        z=position-150;
-        y=z;
-        var porcentMax = maxDesployer*3/100;
-        if(porcentMax<5){porcentMax=50}
-        else if(porcentMax>10){porcentMax=5}
-        if(y>maxDesployer-porcentMax){
-          z=maxDesployer-porcentMax;
-        }
-        if($.widthSecondOptions>780){
-          z=z*1.7;
-          if(z>($.widthSecondOptions-420)){
-            z=maxDesployer;
-          }
-        }
-        y = -z;
-        xy =  y + 'px';
-        $this1.css({ 'transform':'translateX('+xy+')'});
-      }
+    $('#'+element+'Ul').removeClass('rightSecondOptions');
+    $('#'+element+'Fn').css({
+      'right':'',
+      'left':'0'
     });
-  }
+    var z;
+    var y;
+    var xy;
+    var maxDesployer = $.widthSecondOptions-420;//La cantidad de pixels maxima que se recorrera el parallax
+    if($.widthSecondOptions>480){
+      $('.parallaxSecond').each(function(){
+        var $this1 = $(this);
+        if (position<150) {
+          z=0;
+        }else if(position>150){
+          count=position-145;
+          z=position-150;
+          y=z;
+          var porcentMax = maxDesployer*3/100;
+          if(porcentMax<5){porcentMax=50}
+          else if(porcentMax>10){porcentMax=5}
+          if(y>maxDesployer-porcentMax){
+            z=maxDesployer-porcentMax;
+          }
+          if($.widthSecondOptions>780){
+            z=z*1.7;
+            if(z>($.widthSecondOptions-420)){
+              z=maxDesployer;
+            }
+          }
+          y = -z;
+          xy =  y + 'px';
+          $this1.css({ 'transform':'translateX('+xy+')'});
+        }
+      });
+    }
 }
 }
