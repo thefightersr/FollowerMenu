@@ -212,22 +212,6 @@ ul#followerMenuOptions{
   overflow: hidden;
   transition: all linear .3s;
   box-shadow:3px 2px 10px 0px grey;
-
-  img{
-    // width:1200px;
-    // height: 740px;
-    // transform: scale(5);
-    animation-name: imgPreview;
-    animation-duration: 8s;
-    animation-iteration-count: infinite;
-  }
-}
-@keyframes imgPreview {
-  0%   {transform: translateX(-20px);}
-  25%  {transform: translateX(-750px);}
-  50%  {transform: translateX(-750px) translateY(-450px);}
-  75% {transform: translateX(-20px) translateY(-450px);}
-  100% {transform: translateX(-20px) translateY(0px);}
 }
 .previewFunctionSecond{
   position: absolute;
@@ -427,14 +411,6 @@ ul#followerMenuOptions{
         padding: 20px 0 5px 0;
       }
     }
-    .imagesSlideSecond{
-      position: absolute;
-      top: 45px;
-      right: 0;
-      left: 0;
-      width: 550px;
-      height: 330px !important;
-    }
 
 .shopClass{
   position: fixed;
@@ -510,10 +486,12 @@ ul#followerMenuOptions{
           font-size: .8rem;
           margin-right: 15px;
           margin-bottom: 10px;
+          transition: all linear .2s;
           text-decoration: none;
 
           &:hover{
             color: black;
+            transition: all linear .2s;
           }
         }
       }
