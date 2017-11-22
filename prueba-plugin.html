@@ -104,7 +104,7 @@
 
     <script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
 
-    <script src="plugin.js"></script>
+    <script src="plugin2.js"></script>
     <script>
     $(document).ready(function(){
       $("body").followermenu({
@@ -116,11 +116,12 @@
         activateShop:true,
         activateTeam:true,
         activateGrid:true,
+        activateContact:true,
         activateSecondMenu:true,
         optionsMenu:[{
           optionName:'HOME',
           functionName:'preview',
-          functionData:'img/preview1.jpg',
+          functionData:'img/1.jpg',
           href:'',
           activateMenu:'true'
           },{
@@ -348,16 +349,70 @@
               functionData:''
               },{
                 optionName:'WEBS',
-                functionName:'preview',
+                functionName:'previewSecond',
                 functionData:'img/preview1.jpg'
               },{
-                optionName:'SEO',
-                functionName:'',
-                functionData:''
+                optionName:'TEAM',
+                functionName:'workTeamSecond',
+                href:'',
+                functionData:[{
+                    employedName:'John Doe',
+                    employedRoll:'Directive',
+                    imagePath:'img/jhondoe.jpg',
+                    href:''
+                  },{
+                    employedName:'John Doe',
+                    employedRoll:'Directive',
+                    imagePath:'img/jhondoe.jpg',
+                    href:''
+                  },{
+                    employedName:'John Doe',
+                    employedRoll:'Directive',
+                    imagePath:'img/jhondoe.jpg',
+                    href:''
+                  },{
+                    employedName:'John Doe',
+                    employedRoll:'Directive',
+                    imagePath:'img/jhondoe.jpg',
+                    href:''
+                  },{
+                    employedName:'John Doe',
+                    employedRoll:'Directive',
+                    imagePath:'img/jhondoe.jpg',
+                    href:''
+                  },{
+                    employedName:'John Doe',
+                    employedRoll:'Directive',
+                    imagePath:'img/jhondoe.jpg',
+                    href:''
+                  }],
               },{
-                optionName:'PLANTILLAS',
-                functionName:'',
-                functionData:''
+              optionName:'SLIDESecond',
+              functionName:'secondMenuSlide',
+              href:'',
+              functionData:[
+                {
+                  imagePath:'img/4.jpg',
+                  titleSlide:'PREVIEW 1',
+                  textSlide:'Este es la primeta imagen'
+                },{
+                  imagePath:'img/12s.jpg',
+                  titleSlide:'PREVIEW asdd 1',
+                  textSlide:'Este es la primeta imagen'
+                },{
+                  imagePath:'img/tatu.jpg',
+                  titleSlide:'PREVIEW efsdf gdfgfhgh 1',
+                  textSlide:'Este es la primeta imagen'
+                },{
+                  imagePath:'img/12s.jpg',
+                  titleSlide:'PREVIEW asdd 1',
+                  textSlide:'Este es la primeta imagen'
+                },{
+                  imagePath:'img/4.jpg',
+                  titleSlide:'PREVIEW 1',
+                  textSlide:'Este es la primeta imagen'
+                }
+              ]
               },{
                 optionName:'PLANTILLAS',
                 functionName:'',
@@ -742,7 +797,15 @@
             principalMessage:'¿Tienes algo que decirnos?',
             areaEmail:'Cual es su correo?',
             areaMessage:'¿Que quieres decirnos?',
-            mapImage:'map-image.jpg'
+            mapImage:'img/mapa.jpg',
+            mapData:{
+              mapEmail:'asdf@asdf.com',
+              iconEmail:'fa-envelope-o',
+              mapAddress:'C/ Gloria Trevi #6',
+              iconAddress:'fa-location-arrow',
+              mapTel:'676-777-888',
+              iconTel:'fa-phone',
+            }
           }
           },{
           optionName:'SLIDE',
@@ -793,8 +856,6 @@
           }
         ],
       });
-
-
     });
     </script>
 
