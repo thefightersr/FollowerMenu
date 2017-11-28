@@ -23,7 +23,6 @@
       imageCurrent++;
     }
 
-    console.log($.slideClass+' px');
 
     if(($.countImagesThis>countImagesFinal) || (click=='left')){
       slideImagePx=imageCurrent *-550;
@@ -34,7 +33,6 @@
       countImagesFinal=imageCurrent+1;
 
       $($.slideId).attr('data-imageCurrent',imageCurrent);
-      console.log(imageCurrent+' slide');
       $($.slideId+' #imageSlide'+imageCurrent+" .textSlide").delay(1500).show('slow');
     }else{
       clearInterval(slideTimeout);
@@ -125,6 +123,7 @@
   if(true){
     content = "<div id='followerMenuContainer'>";
     content += "<div id='followerMenuOptionsDeployed'>";
+    content += "<div id='disableHover'></div>"
     //Create container secondMenu
     if($.settings.activateSecondMenu){
       content += "<div id='secondMenuContainer' class='functionFollower'></div>"
@@ -162,7 +161,7 @@
           $.widthSecondOptions=0;
           contentSecond = "";
           option.functionData.forEach((b)=>{
-            contentSecond = "<li class='optionSecondMenu hvr-back-pulse "+b.functionName+"' id='"+b.optionName+"Sec'>"+b.optionName+"</li>";
+            contentSecond = "<li class='optionSecondMenu hoverEnableFunction hvr-back-pulse "+b.functionName+"' id='"+b.optionName+"Sec'>"+b.optionName+"</li>";
             $("#"+option.optionName+"Ul").append(contentSecond);
             $.widthSecondOptions+= $("#"+b.optionName+"Sec").width();
 
@@ -251,19 +250,11 @@
         'z-index': '0'
       });
       $.idContact = element.target.id;
-      console.log($.idContact);
       $("#"+$.idContact+'Fn').css({
         'height':'330px',
         'opacity':'1',
         'z-index':'1'
       })
-    },
-    ()=>{
-      // $("#"+$.idContact+'Fn').css({
-      //   'height':'0',
-      //   'opacity':'0',
-      //   'z-index':'0'
-      // })
     });
   }
   if($.settings.activateShop){
@@ -275,12 +266,11 @@
         'height': '0',
         'z-index': '0'
       });
-      console.log($.idShop);
       $("#"+$.idShop+'Fn').css({
         'height':'330px',
         'opacity':'1',
         'z-index':'1'
-      })
+      });
     },
     ()=>{
       // $("#"+$.idShop+'Fn').css({
@@ -295,18 +285,26 @@
         'color':''
       });
       $.idTab = element.target.id;
-      console.log(element);
       $("#"+$.idTab).css({
         'background-color':'black',
         'color':'white'
-      })
+      });
       $("#"+$.idTab+'Tab').removeClass('hideItem').slideDown('fast');
       $('.hideItem').slideUp('fast');
       $("#"+$.idTab+'Tab').addClass('hideItem');
     });
   }
+  //Create content secondMenu
   if($.settings.activateSecondMenu){
     //Hover secondMenu
+    $('.nothingFunction').removeClass('hoverEnableFunction');
+    $('.nothingFunction').hover(()=>{
+      $("#secondMenuContainer").css({
+        'opacity':'1',
+        'height': '55px',
+        'z-index': '1'
+      });
+    })
     //Deslizar contenido secondMenu
     $('.containerUlSecondMenu').hide('fast');
     $('.secondMenu').hover((element)=>{
@@ -339,8 +337,12 @@
       });
     });
     //Deslizar contenido secondMenu
-    $('.optionSecondMenu').hover((element)=>{
+    $('.hoverEnableFunction').hover((element)=>{
       $.idOptionSecondMenu = element.target.id;
+      $('.secondFunction').css({
+        'opacity':'0',
+        'z-index': '0'
+      });
       $("#"+$.idOptionSecondMenu+"Fn").css({
         'opacity':'1',
         'z-index': '1'
@@ -366,7 +368,7 @@
       if(option.functionName=="secondMenu"){
         option.functionData.forEach((second)=>{
           if(second.functionName=="previewSecond"){
-            content = "<div class='previewFunction previewFunctionSecond ' id='"+second.optionName+"SecFn'><img id='imgPreview' src='"+second.functionData+"'></div>";
+            content = "<div class='previewFunction secondFunction previewFunctionSecond ' id='"+second.optionName+"SecFn'><img id='imgPreview' src='"+second.functionData+"'></div>";
             $("#secondMenuContainer").append(content);
             content="";
           }
@@ -398,13 +400,8 @@
       $('#borderFollowerMenu').animate({opacity:1},0);
     });
     $('.previewSecond').hover((element)=>{
-      $.idPreview = element.target.id;
+      $.idSecondPreview = element.target.id;
       clearInterval(slideTimeout);
-
-      $("#"+$.idPreview+"Fn").css({
-        'opacity':'1',
-        'z-index': '1',
-      });
     });
   }
   //Create content function slide
@@ -425,7 +422,7 @@
         option.functionData.forEach((second)=>{
           $.countImagesSecond=0;
           if(second.functionName=="secondMenuSlide"){
-            content = "<div id='"+second.optionName+"SecFn' class='imagesSlideSecondContainer gd"+$.countImagesSecond+"' data-imageCurrent='0'><a class ='chevron-left'><i class='fa fa-chevron-left'></i></a><a class ='chevron-right'><i class='fa fa-chevron-right'></i></a>";
+            content = "<div id='"+second.optionName+"SecFn' class='imagesSlideSecondContainer secondFunction gd"+$.countImagesSecond+"' data-imageCurrent='0'><a class ='chevron-left'><i class='fa fa-chevron-left'></i></a><a class ='chevron-right'><i class='fa fa-chevron-right'></i></a>";
             second.functionData.forEach((b)=>{
               content += "<div class='imageSlideSecond' id='imageSlide"+$.countImagesSecond+"'><img class='img-slide' src='"+b.imagePath+"'><div class='textSlide'><h3 class='titleSlide'>"+b.titleSlide+"</h3><p>"+b.textSlide+"</p></div></div>";
               $.countImagesSecond++;
@@ -443,9 +440,6 @@
       $.slideId='#'+$.idSlide+'Fn';
       $.slideClass='#'+$.idSlide+'Fn .imageSlide';
       $.countImagesThis=$("#"+$.idSlide+"Fn")[0].childElementCount-2;
-      function slideTimeoutCallF(){
-        slideTimeoutF($.countImagesThis);
-      }
       clearInterval(slideTimeout);
       slideTimeout = setInterval(slideTimeoutF, 3000);
       $($.slideId+" #imageSlide"+$.imageCurrent+" .textSlide").delay(1000).show('slow');
@@ -462,50 +456,34 @@
       $('#borderFollowerMenu').animate({opacity:0},0);
     },
     ()=>{
-      function slideTimeoutCallF(){
-        slideTimeoutF($.countImagesThis);
-      }
       clearInterval(slideTimeout);
       slideTimeout = setInterval(slideTimeoutF, 3000);
-    }
-  );
+    });
       //Hover functio n slide
     $('.secondMenuSlide').hover((element)=>{
       $.idSlideSecond = element.target.id;
       $.slideClass='#'+$.idSlideSecond+'Fn .imageSlideSecond';
       $.slideId='#'+$.idSlideSecond+'Fn';
       $.countImagesThis=$("#"+$.idSlideSecond+"Fn")[0].childElementCount-2;
-      function slideTimeoutCallF(){
-        slideTimeoutF($.countImagesThis);
-      }
-      clearInterval(slideTimeout);
-      slideTimeout = setInterval(slideTimeoutCallF, 3000);
-      $($.slideId+" #imageSlide"+$.imageCurrent+" .textSlide").delay(1000).show('slow');
-      $("#"+$.idSlideSecond+"Fn").css({
-        // 'opacity':'1',
-        // 'height': '330px',
-        // 'z-index': '2'
-      });
-    },
-    ()=>{
-      function slideTimeoutCallF(){
-        slideTimeoutF($.countImagesThis);
-      }
       clearInterval(slideTimeout);
       slideTimeout = setInterval(slideTimeoutF, 3000);
+      $($.slideId+" #imageSlide"+$.imageCurrent+" .textSlide").delay(1000).show('slow');
+    },
+    ()=>{
+      // clearInterval(slideTimeout);
+      // slideTimeout = setInterval(slideTimeoutF, 3000);
     });
     //Slide images with click
     $('.chevron-right').click((element)=>{
-      console.log(slideImagePx+' click');
       clearInterval(slideTimeout);
       slideTimeoutF();
       slideTimeout = setInterval(slideTimeoutF, 3000);
     });
     $('.chevron-left').click((element)=>{
-      console.log($.slideClass +' left');
-      if(countImagesFinal>=2){
-      clearInterval(slideTimeout);
-      slideTimeoutF('left');
+      imageCurrent = $($.slideId).attr('data-imageCurrent');
+      if(imageCurrent>0){
+        clearInterval(slideTimeout);
+        slideTimeoutF('left');
       //   slideImagePx=imageCurrent*550;
       //   $($.slideClass).css({
       //     'transform':'translateX('+slideImagePx+'px)',
@@ -513,12 +491,161 @@
       //   });
       //   countImagesFinal--;
       //   imageCurrent--;
-      //   console.log(imageCurrent +' left 2');
       //   $($.slideId).attr('data-imageCurrent',imageCurrent);
-      slideTimeout = setInterval(slideTimeoutF, 3000);
+        slideTimeout = setInterval(slideTimeoutF, 3000);
       }
     });
   }
+  //Create content grid
+  if($.settings.activateGrid){
+    $.settings.optionsMenu.forEach((option)=>{
+      var i=0;
+      if(option.functionName=="gridCamp"){
+        content = "<div id='"+option.optionName+"Fn' class='gridCampContainer functionFollower'> <div class='scrollbar container '>";
+        option.functionData.forEach((a)=>{
+          content += "<div class='row' id='gridRow"+i+"'>";
+          a.row.forEach((b)=>{
+            content += "<div style='overflow:hidden' class=' col-sm-"+b.colSize+"'>";
+            if(b.colData.imagePath!=''){
+              content += "<img class='img-fluid' src='"+b.colData.imagePath+"'>"
+            }
+            if(b.colData.textContent!=''){
+              content += "<p class='content'>"+b.colData.textContent+"</p>";
+            }
+            content += "</div>";
+          });
+          content += "</div>";
+          i++;
+        });
+        content += "</div></div>";
+        $("#followerMenuOptionsDeployed").append(content);
+      }
+      if(option.functionName=="secondMenu"){
+        option.functionData.forEach((second)=>{
+          if(second.functionName=="secondGridCamp"){
+            content = "<div class='secondMenuGridCampContainer secondFunction scrollbar container ' id='"+second.optionName+"SecFn'>";
+            second.functionData.forEach((a)=>{
+              content += "<div class='row' id='gridRowSecond"+i+"'>";
+              a.row.forEach((b)=>{
+                content += "<div style='overflow:hidden' class='col-sm-"+b.colSize+"'>";
+                if(b.colData.imagePath!=''){
+                  content += "<img class='img-fluid' src='"+b.colData.imagePath+"'>"
+                }
+                if(b.colData.textContent!=''){
+                  content += "<p class='content'>"+b.colData.textContent+"</p>";
+                }
+                content += "</div>";
+              });
+              content += "</div>";
+              i++;
+            });
+            content += "</div>";
+            $("#secondMenuContainer").append(content);
+          }
+          });
+      }
+    });
+    //Hover function grid
+    $('.gridCamp').hover((element)=>{
+      $.idGridCamp = element.target.id;
+      clearInterval(slideTimeout);
+      $('.functionFollower').css({
+        'opacity':'0',
+        'height': '0',
+        'z-index': '0'
+      });
+      $("#"+$.idGridCamp+"Fn").css({
+        'opacity':'1',
+        'height': '330px',
+        'z-index': '1',
+      });
+      $('#borderFollowerMenu').animate({opacity:0},0);
+    });
+    $('.secondGridCamp').hover((element)=>{
+      $.idSecondGridCamp = element.target.id;
+      console.log($.idSecondGridCamp);
+      clearInterval(slideTimeout);
+      $('#borderFollowerMenu').animate({opacity:0},0);
+    });
+  }
+  //End gridCamp
+  //Create content function workTeam
+  if($.settings.activateTeam){
+    $.settings.optionsMenu.forEach((option)=>{
+      var i=0;
+      if(option.functionName=="workTeam"){
+        content = "<div class='workTeamContainer row functionFollower' id='"+option.optionName+"Fn'>";
+        option.functionData.forEach((a)=>{
+          content += "<div class='employedTeam col-sm-4' id='employedTeam"+i+"'><img class='img-fluid' src='"+a.imagePath+"'><div class='textTeam' id='employedTeam"+i+"'><h5 class='employedName'>"+a.employedName+"</h5><p class='employedRoll'>"+a.employedRoll+"</p> </div></div>";
+          i++;
+        });
+        content += "</div>";
+        $("#followerMenuOptionsDeployed").append(content);
+      }
+      if(option.functionName=="secondMenu"){
+        option.functionData.forEach((second)=>{
+          if(second.functionName=="workTeamSecond"){
+            content = "<div class='workTeamContainer row secondFunction' id='"+option.functionName+"Fn'>";
+            second.functionData.forEach((a)=>{
+              content += "<div class='employedTeam col-sm-4' id='employedTeam"+i+"'><img  src='"+a.imagePath+"'><div class='textTeam'><h5 class='employedName'>"+a.employedName+"</h5><p class='employedRoll'>"+a.employedRoll+"</p> </div></div>";
+              i++;
+            });
+            content += "</div>";
+            $("#secondMenuContainer").append(content);
+            content = "";
+          }
+        });
+      }
+    });
+    //Hidden work function
+    $('.workTeamContainer .textTeam').slideUp();
+    //Hover function workTeam
+    $('.workTeamSecond').hover((element)=>{
+      $.idWorkTeam = element.target.id;
+      clearInterval(slideTimeout);
+      $("#"+$.idWorkTeam+"Fn").css({
+        'opacity':'1',
+        'height': '330px',
+        'z-index': '1',
+      });
+      var time=500;
+      var elementEmployed=[];
+      elementEmployed=$("#"+$.idWorkTeam+"Fn .employedTeam");
+      elementEmployed.each((employed)=>{
+        $("#"+$.idWorkTeam+"Fn #"+elementEmployed[employed].id+" #employedTeam"+employed).delay(time).slideDown('slow');
+        time=time+100;
+      });
+    });
+    $('.workTeam').hover((element)=>{
+      $.idWorkTeam = element.target.id;
+      clearInterval(slideTimeout);
+      $('.functionFollower').css({
+        'opacity':'0',
+        'height': '0',
+        'z-index': '0'
+      });
+      $("#"+$.idWorkTeam+"Fn").css({
+        'opacity':'1',
+        'height': '330px',
+        'z-index': '1',
+      });
+      var time=500;
+      var elementEmployed=[];
+      elementEmployed=$("#"+$.idWorkTeam+"Fn .employedTeam");
+      elementEmployed.each((employed)=>{
+        $("#"+$.idWorkTeam+"Fn #"+elementEmployed[employed].id+" #employedTeam"+employed).delay(time).slideDown('slow');
+        time=time+100;
+      });
+    },
+    ()=>{
+      // $("#"+$.idWorkTeam+"Fn").css({
+      //   'opacity':'0',
+      //   'height': '0',
+      //   'z-index': '0',
+      // });
+    });
+  }
+  //End function imagesSlide
   //Call function slide Menu
   $.callback=false;
   $("#followerMenuButton-right").click(()=>{
@@ -554,169 +681,6 @@
     $.callback=!$.callback;
     slideMenu('left','right');
   });
-
-  //Create content grid
-  if($.settings.activateGrid){
-    $.settings.optionsMenu.forEach((option)=>{
-      var i=0;
-      if(option.functionName=="gridCamp"){
-        content = "<div class='gridCampContainer scrollbar container functionFollower' id='"+option.optionName+"Fn'>";
-        option.functionData.forEach((a)=>{
-          content += "<div class='row' id='gridRow"+i+"'>";
-          a.row.forEach((b)=>{
-            content += "<div style='overflow:hidden' class=' col-sm-"+b.colSize+"'>";
-            if(b.colData.imagePath!=''){
-              content += "<img class='img-fluid' src='"+b.colData.imagePath+"'>"
-            }
-            if(b.colData.textContent!=''){
-              content += "<p class='content'>"+b.colData.textContent+"</p>";
-            }
-            content += "</div>";
-          });
-          content += "</div>";
-          i++;
-        });
-        content += "</div>";
-        $("#followerMenuOptionsDeployed").append(content);
-      }
-      if(option.functionName=="secondMenu"){
-        option.functionData.forEach((second)=>{
-          if(second.functionName=="gridCamp"){
-            content = "<div class='gridCamp secondMenuGridCamp ' id='"+option.functionName+"Fn'>";
-            second.functionData.forEach((a)=>{
-              content += "<div class='row' id='gridRow"+i+"'>";
-              a.row.forEach((b)=>{
-                content += "<div class='col-sm-"+b.colSize+"'>";
-                if(b.colData.imagePath!=''){
-                  content += "<img class='img-fluid' src='"+b.colData.imagePath+"'>"
-                }
-                if(b.colData.textContent!=''){
-                  content += "<p>"+b.colData.textContent+"</p>";
-                }
-                content += "</div>";
-              });
-              content += "</div>";
-              i++;
-            });
-            content += "</div>";
-            $("#followerMenuOptionsDeployed").append(content);
-          }
-          });
-      }
-    });
-    //Hover function grid
-    $('.gridCamp').hover((element)=>{
-      $.idGridCamp = element.target.id;
-      slideTimeoutF();
-      clearInterval(slideTimeout);
-      $('.functionFollower').css({
-        'opacity':'0',
-        'height': '0',
-        'z-index': '0'
-      });
-      $("#"+$.idGridCamp+"Fn").css({
-        'opacity':'1',
-        'height': '330px',
-        'z-index': '1',
-      });
-      var timer = setTimeout(tresSec,400);
-      function tresSec(){
-        $("#"+$.idGridCamp+"Fn").css({
-          'overflow-y': 'auto'
-        });
-      }
-      $('#borderFollowerMenu').animate({opacity:0},0);
-    },()=>{
-      // $("#"+$.idGridCamp+"Fn").css({
-      //   'opacity':'0',
-      //   'height': '0',
-      //   'z-index': '0',
-      //   'overflow-y': 'hidden'
-      // });
-      // $('#borderFollowerMenu').animate({opacity:1},0);
-    }
-  );
-  }
-  //End gridCamp
-  //Create content function workTeam
-  if($.settings.activateTeam){
-    $.settings.optionsMenu.forEach((option)=>{
-      var i=0;
-      if(option.functionName=="workTeam"){
-        content = "<div class='workTeamContainer row functionFollower' id='"+option.optionName+"Fn'>";
-        option.functionData.forEach((a)=>{
-          content += "<div class='employedTeam col-sm-4' id='employedTeam"+i+"'><img class='img-fluid' src='"+a.imagePath+"'><div class='textTeam' id='employedTeam"+i+"'><h5 class='employedName'>"+a.employedName+"</h5><p class='employedRoll'>"+a.employedRoll+"</p> </div></div>";
-          i++;
-        });
-        content += "</div>";
-        $("#followerMenuOptionsDeployed").append(content);
-      }
-      if(option.functionName=="secondMenu"){
-        option.functionData.forEach((second)=>{
-          if(second.functionName=="workTeamSecond"){
-            content = "<div class='workTeamContainer row ' id='"+option.functionName+"Fn'>";
-            second.functionData.forEach((a)=>{
-              content += "<div class='employedTeam col-sm-4' id='employedTeam"+i+"'><img  src='"+a.imagePath+"'><div class='textTeam'><h5 class='employedName'>"+a.employedName+"</h5><p class='employedRoll'>"+a.employedRoll+"</p> </div></div>";
-              i++;
-            });
-            content += "</div>";
-            $("#secondMenuContainer").append(content);
-            content = "";
-          }
-        });
-      }
-    });
-    //Hidden work function
-    $('.workTeamContainer .textTeam').slideUp();
-    //Hover function workTeam
-    $('.workTeamSecond').hover((element)=>{
-      $.idWorkTeam = element.target.id;
-      slideTimeoutF();
-      clearInterval(slideTimeout);
-      $("#"+$.idWorkTeam+"Fn").css({
-        'opacity':'1',
-        'height': '330px',
-        'z-index': '1',
-      });
-      var time=500;
-      var elementEmployed=[];
-      elementEmployed=$("#"+$.idWorkTeam+"Fn .employedTeam");
-      elementEmployed.each((employed)=>{
-        $("#"+$.idWorkTeam+"Fn #"+elementEmployed[employed].id+" #employedTeam"+employed).delay(time).slideDown('slow');
-        time=time+100;
-      });
-    });
-    $('.workTeam').hover((element)=>{
-      $.idWorkTeam = element.target.id;
-      slideTimeoutF();
-      clearInterval(slideTimeout);
-      $('.functionFollower').css({
-        'opacity':'0',
-        'height': '0',
-        'z-index': '0'
-      });
-      $("#"+$.idWorkTeam+"Fn").css({
-        'opacity':'1',
-        'height': '330px',
-        'z-index': '1',
-      });
-      var time=500;
-      var elementEmployed=[];
-      elementEmployed=$("#"+$.idWorkTeam+"Fn .employedTeam");
-      elementEmployed.each((employed)=>{
-        $("#"+$.idWorkTeam+"Fn #"+elementEmployed[employed].id+" #employedTeam"+employed).delay(time).slideDown('slow');
-        time=time+100;
-      });
-    },
-    ()=>{
-      // $("#"+$.idWorkTeam+"Fn").css({
-      //   'opacity':'0',
-      //   'height': '0',
-      //   'z-index': '0',
-      // });
-    });
-  }
-  //End function imagesSlide
   //Close all function
   $("html").click(function() {
     if($.switch){
@@ -742,7 +706,6 @@
         delayHideButton=300;
       }
       $.callback=!$.callback;
-      slideTimeoutF();
       clearInterval(slideTimeout);
       $('.functionFollower').css({
         'opacity':'0',
@@ -756,7 +719,6 @@
 
 });
   $('#followerMenuOptionsDeployed, #followerMenuButton-left,#followerMenuButton-right ').click(function (e) {
-    console.log('klkl');
     e.stopPropagation();
 });
   //ArrowMove
@@ -776,11 +738,12 @@
     });
   })
 
-
 //Include all function of mousemove like parallax effect
 $(document).mousemove(function(event){
   position=event.pageX;
   if($.switch==false){
+    console.log('switch');
+    $('#disableHover').show();
       //Mostrar boton menu izquierdo y ocuktar derecho
       if(position<$.tamañoVentana){
         $.side='left';
@@ -810,6 +773,7 @@ $(document).mousemove(function(event){
         }
       }
   }else{
+    $('#disableHover').hide();
     //Moviento parallax
     if($.side=="right"){
       var z;
@@ -965,12 +929,20 @@ function slideMenu(side, otherSide){
   }
   else{
     //Hide function followerMenu
-    $("#followerMenuOptionsDeployed, #borderFollowerMenu").css({
+    $("#borderFollowerMenu").css({
+      opacity:0.5,
+      transition:'all linear 1s',
+    });
+    $("#borderFollowerMenu").css({
       width:'0px',
       opacity:0.5,
       transition:'all linear .3s',
     });
-    slideTimeoutF();
+    $("#followerMenuOptionsDeployed").css({
+      width:'0px',
+      opacity:0.5,
+      transition:'all linear .3s',
+    });
     clearInterval(slideTimeout);
     $('.functionFollower').css({
       width:'0',
@@ -1119,8 +1091,8 @@ function parallaxEfect(element){
         xy =  y + 'px';
         $this1.css({ 'transform':'translateX('+xy+')'});
       }
-  }
-}else if($.side=="left"){
+    }
+  }else if($.side=="left"){
     $('#'+element+'Ul').removeClass('rightSecondOptions');
     $('#'+element+'Fn').css({
       'right':'',

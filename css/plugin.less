@@ -233,6 +233,7 @@ ul#followerMenuOptions{
   position: absolute;
   top: 45px;
   right: 0;
+  opacity: 0;
   left: 0;
   width: 550px;
   height: 330px !important;
@@ -244,17 +245,49 @@ ul#followerMenuOptions{
 .gridCampContainer{
   position: fixed !important;
   top: 57.3%;
+  overflow: hidden;
+  opacity: 0;
+  width: 550px ;
   height: 0;
+  max-height: 330px;
+  border: solid 1px #c1d82f;
+  border-bottom: solid 9px #c1d82f;
+  background: darken(white, 5%);
+  transition: all linear .3s;
+
+   .container{
+    overflow-x: hidden;
+    overflow: hidden;
+    overflow-y: auto;
+    max-height: 321px;
+    min-height: 321px;
+    width: 550px ;
+    padding: 0px 5px !important;
+    .content{
+      text-align: center;
+      margin: 2px 0;
+      border-radius: 2px;
+      background: white;
+    }
+    .row{
+      div{
+        padding: 3px;
+      }
+    }
+  }
+}
+.secondMenuGridCampContainer{
+  position: absolute ;
+  top: 45px;
   opacity: 0;
   overflow-x: hidden;
-  overflow-y: hidden;
   overflow: hidden;
-  max-height: 330px;
+  overflow-y: auto;
+  max-height: 280px;
+  min-height: 280px;
   width: 550px ;
   padding: 0px 5px !important;
   background: darken(white, 5%);
-  border: solid 1px #c1d82f;
-  border-bottom: solid 9px #c1d82f;
   transition: all linear .3s;
   .content{
     text-align: center;
@@ -268,7 +301,6 @@ ul#followerMenuOptions{
     }
   }
 }
-
 #secondMenuContainer{
   overflow: hidden;
   border: solid 1px #c1d82f;
@@ -437,9 +469,11 @@ ul#followerMenuOptions{
       width: 550px;
       height: 290px !important;
       display: flex;
+      max-height: 280px;
+      min-height: 280px;
       flex-direction: row;
       flex-wrap: nowrap;
-      opacity: 1;
+      opacity: 0;
       width: 550px;
       height: 0;
       border:1px solid #c1d82f;
@@ -793,13 +827,27 @@ ul#followerMenuOptions{
       }
     }
   }
+// //Hide secondFunction
+// .hideSecondFunction{
+//   opacity: 1;
+//   z-index: 1;
+// }
 //Solo para demo
-    #GRIDFn{
-      p{
-        padding: 5px 0;
-        color: #aaa;
-      }
-    }
+#GRIDFn, #PORFOLIOSecFn{
+  p{
+    padding: 5px 0;
+    color: #aaa;
+  }
+}
+//Disable hover
+#disableHover{
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  height: 100px;
+  transition: all linear .3s;
+  z-index: 2;
+}
     /* Radial Out */
     .hvr-radial-out {
       display: inline-block ;
