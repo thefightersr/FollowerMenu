@@ -53,12 +53,14 @@ ul#followerMenuOptions {
   width: 500px;
 }
 ul#followerMenuOptions li {
+  -webkit-user-select: none;
   padding: 8px;
   margin: 1px;
   color: #f2f2f2;
   font-size: 16px;
 }
-.activatetrue:before {
+.activatetrue:before,
+.activateTemporaly:before {
   content: "";
   position: absolute ;
   z-index: -1;
@@ -99,6 +101,7 @@ ul#followerMenuOptions li {
   color: #e6e6e6;
   -webkit-transition: all .3s linear;
   transition: all .3s linear;
+  -webkit-user-select: none;
   opacity: 0.5;
 }
 #followerMenuButton-left:hover,
@@ -132,6 +135,13 @@ ul#followerMenuOptions li {
           transform: rotateZ(20deg);
   -webkit-transition: all .1s linear !important;
   transition: all .1s linear !important;
+}
+#search-menu-left.active {
+  font-size: 1.8rem;
+  opacity: 1;
+  color: #FF9985;
+  -webkit-transform: rotateZ(20deg);
+          transform: rotateZ(20deg);
 }
 #login-menu-left {
   position: fixed;
@@ -175,6 +185,13 @@ ul#followerMenuOptions li {
           transform: rotateZ(20deg);
   -webkit-transition: all .1s linear !important;
   transition: all .1s linear !important;
+}
+#search-menu-right.active {
+  font-size: 1.8rem;
+  opacity: 1;
+  color: #FF9985;
+  -webkit-transform: rotateZ(20deg);
+          transform: rotateZ(20deg);
 }
 #login-menu-right {
   position: fixed;
@@ -417,15 +434,13 @@ ul#followerMenuOptions li {
   padding: 0;
 }
 #secondMenuContainer ul.parallaxSecond .optionSecondMenu {
+  -webkit-user-select: none;
   padding: 10px 5px;
   font-family: 'oswald', sans-serif;
   font-size: 14px;
   color: #FF9985;
   -webkit-transition: all linear .1s;
   transition: all linear .1s;
-}
-#secondMenuContainer ul.parallaxSecond .optionSecondMenu:hover {
-  color: white;
 }
 #secondMenuContainer .content {
   text-align: center;
@@ -461,23 +476,28 @@ ul#followerMenuOptions li {
 }
 .workTeamContainer {
   position: fixed !important;
+  overflow-x: hidden;
+  overflow: hidden;
+  overflow-y: auto;
   top: 57%;
   width: 550px;
   height: 0;
-  overflow: hidden;
   border: solid 1px #c1d82f;
-  background: #ccc;
+  background: white;
   -webkit-transition: all linear .3s;
   transition: all linear .3s;
   margin-left: 0;
   margin-right: 0;
-  padding-right: 3px;
+  padding-right: 0px;
   opacity: 0;
   border-bottom: solid 9px #c1d82f;
 }
 .workTeamContainer .employedTeam {
   padding-bottom: 0;
   overflow: hidden;
+  border: white 1px solid;
+  min-width: 130px;
+  min-height: 130px;
 }
 .workTeamContainer .employedTeam img {
   position: absolute;
@@ -488,26 +508,49 @@ ul#followerMenuOptions li {
 }
 .workTeamContainer .employedTeam .textTeam {
   position: absolute;
-  left: 3px;
+  left: 0px;
   right: 0px;
   bottom: 0px;
   padding-top: 3px;
   background-color: rgba(255, 153, 133, 0.9);
   text-align: center;
+  max-height: 58px;
+}
+.workTeamContainer .employedTeam .textTeam a {
+  text-decoration: none;
+}
+.workTeamContainer .employedTeam .textTeam a:hover h5 {
+  color: white;
 }
 .workTeamContainer .employedTeam .textTeam h5 {
   color: #444;
-  margin-bottom: 10px;
-  display: inline;
+  margin-bottom: 3px;
   padding: 0 5px;
+  max-width: 90%;
+  overflow: hidden;
+  max-height: 24px;
   -webkit-box-shadow: 0px 3px 3px 1px #e6e6e6;
           box-shadow: 0px 3px 3px 1px #e6e6e6;
   text-align: center;
+  -webkit-transition: all linear .1s;
+  transition: all linear .1s;
+}
+.workTeamContainer .employedTeam .textTeam h5:hover {
+  color: white;
 }
 .workTeamContainer .employedTeam .textTeam p {
   text-align: center;
   margin-bottom: 3px;
+  margin-right: 5px;
   padding-top: 3px;
+}
+.workTeamContainer .employedTeam .textTeamH {
+  -webkit-transition: all linear .2s;
+  transition: all linear .2s;
+}
+.workTeamContainer .employedTeam:hover .textTeamH {
+  -webkit-transform: translateY(25px);
+          transform: translateY(25px);
 }
 .imagesSlideContainer {
   position: fixed !important;
@@ -611,21 +654,21 @@ ul#followerMenuOptions li {
   color: white;
 }
 .imagesSlideSecondContainer .img-slide {
-  height: 296px;
+  height: 280px;
   width: 550px;
 }
 .imagesSlideSecondContainer .imageSlideSecond {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 296px;
+  height: 280px;
   width: 550px;
 }
 .imagesSlideSecondContainer .textSlide {
   position: absolute;
   text-align: center;
   width: 420px;
-  bottom: 2rem;
+  top: 150px ;
   left: 65px;
   background: rgba(255, 165, 0, 0.75);
   padding: 20px 0 5px 0;
@@ -815,6 +858,7 @@ ul#followerMenuOptions li {
   background-color: white;
 }
 .shopClass ul.tabsClass li {
+  -webkit-user-select: none;
   padding: 0 5px;
   border: 1px solid black;
   overflow: hidden;
@@ -908,10 +952,11 @@ ul#followerMenuOptions li {
 }
 .contactClass form #reset {
   float: left;
+  border-bottom: 3px solid #cc0000;
 }
 .contactClass form #reset:hover {
-  border-bottom: 3px solid #cc0000;
-  border-left: 3px solid #e60000;
+  border-left: 3px solid #ff8c76;
+  border-bottom: 3px solid #ff7f66;
 }
 .contactClass form button,
 .contactClass form button:focus,
@@ -981,6 +1026,164 @@ ul#followerMenuOptions li {
 }
 .contactClass #map img {
   z-index: -1;
+}
+.listItemsContainer {
+  position: fixed !important;
+  top: 57%;
+  border: solid 1px #c1d82f;
+  border-bottom: 7px solid #c1d82f;
+  height: 0;
+}
+.secondListItemsContainer {
+  position: absolute;
+  top: 45px;
+  min-height: 280px;
+  max-height: 280px;
+}
+.listItemsContainer,
+.secondListItemsContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  overflow-x: hidden;
+  overflow: hidden;
+  width: 550px;
+  opacity: 0;
+  background: white;
+  -webkit-transition: all linear .3s;
+  transition: all linear .3s;
+  margin-left: 0;
+  margin-right: 0;
+  padding-right: 0px;
+}
+.listItemsContainer ul.ulItemsList,
+.secondListItemsContainer ul.ulItemsList {
+  padding-left: 0;
+  padding-top: 8px;
+  max-width: 171px;
+  width: 171px;
+  margin: 0 ;
+  list-style: none;
+}
+.listItemsContainer ul.ulItemsList h5,
+.secondListItemsContainer ul.ulItemsList h5 {
+  border-left: 4px solid #c1d82f;
+  border-bottom: 1px solid #c1d82f;
+  padding-left: 5px;
+  font-size: 1rem;
+  text-align: left;
+  left: 0;
+  margin-bottom: 3px;
+}
+.listItemsContainer ul.ulItemsList a,
+.secondListItemsContainer ul.ulItemsList a {
+  text-decoration: none;
+  width: 100%;
+  border-bottom: 0.5px solid rgba(128, 128, 128, 0.2);
+  border-right: 0.5px solid rgba(128, 128, 128, 0.2);
+  padding: 5px 0;
+  color: #4a4a4a;
+  max-height: 32px;
+  overflow: hidden;
+}
+.listItemsContainer ul.ulItemsList a:hover,
+.secondListItemsContainer ul.ulItemsList a:hover {
+  color: white;
+}
+.listItemsContainer ul.ulItemsList a li,
+.secondListItemsContainer ul.ulItemsList a li {
+  text-align: center;
+  font-size: 14px;
+}
+.listItemsContainer ul.ulItemsList a li i,
+.secondListItemsContainer ul.ulItemsList a li i {
+  padding-left: 10px;
+  padding-top: 3px;
+  float: left;
+}
+.flexsearch--wrapper {
+  height: 35px;
+  width: 0;
+  max-width: 200px !important;
+  overflow: hidden;
+  background: transparent;
+  margin: 0;
+  position: fixed;
+  top: 52%;
+  -webkit-transition: all linear .3s;
+  transition: all linear .3s;
+  -webkit-box-shadow: 3px 2px 10px 0px grey;
+          box-shadow: 3px 2px 10px 0px grey;
+}
+.flexsearch--form {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+.flexsearch--input-wrapper {
+  padding: 0 62px 0 0;
+  /* Right padding for submit button width */
+  overflow: hidden;
+}
+.flexsearch--input {
+  width: 100%;
+}
+/***********************
+ * Configurable Styles *
+ ***********************/
+.flexsearch-left,
+.flexsearch-right {
+  background: transparent;
+}
+.flexsearch--input {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  height: 30px;
+  padding: 0 46px 0 10px;
+  border-color: #FF9985;
+  border-style: solid;
+  border-width: 3px;
+  color: #FF9985;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 14px;
+  -webkit-appearance: none;
+}
+.flexsearch--submit {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  margin-right: 5px;
+  /* border-width */
+  background: transparent;
+  color: #FF9985;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 25px;
+  line-height: 20px;
+}
+.flexsearch--input:focus {
+  outline: none;
+}
+.flexsearch--input:focus.flexsearch--submit {
+  color: #333;
+}
+.flexsearch--submit:hover {
+  color: #c1d82f;
+  cursor: pointer;
+}
+::-webkit-input-placeholder {
+  color: #888;
+}
+input:-moz-placeholder {
+  color: #888888;
 }
 #GRIDFn p,
 #PORFOLIOSecFn p {
@@ -1195,7 +1398,8 @@ ul#followerMenuOptions li {
 }
 .hvr-back-pulse:hover,
 .hvr-back-pulse:focus,
-.hvr-back-pulse:active {
+.hvr-back-pulse:active,
+.activateTemporalySecond {
   -webkit-animation-name: hvr-back-pulse;
           animation-name: hvr-back-pulse;
   -webkit-animation-duration: 1s;
@@ -1207,7 +1411,7 @@ ul#followerMenuOptions li {
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
   background-color: #FF9985;
-  color: white;
+  color: white !important;
 }
 .scrollbar::-webkit-scrollbar {
   width: 3px;

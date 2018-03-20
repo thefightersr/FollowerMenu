@@ -24,6 +24,7 @@
   </head>
   <body>
     <div class="container">
+
       <!-- <div class="row">
         <div class="col-md-4">
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -118,6 +119,7 @@
         activateGrid:true,
         activateContact:true,
         activateSecondMenu:true,
+        activateList:true,
         optionsMenu:[{
           optionName:'HOME',
           functionName:'preview',
@@ -353,40 +355,114 @@
                 functionName:'previewSecond',
                 functionData:'img/preview1.jpg'
               },{
-                optionName:'TEAM',
-                functionName:'nothingFunction',
-                href:'',
-                functionData:[{
-                    employedName:'John Doe',
-                    employedRoll:'Directive',
-                    imagePath:'img/jhondoe.jpg',
-                    href:''
-                  },{
-                    employedName:'John Doe',
-                    employedRoll:'Directive',
-                    imagePath:'img/jhondoe.jpg',
-                    href:''
-                  },{
-                    employedName:'John Doe',
-                    employedRoll:'Directive',
-                    imagePath:'img/jhondoe.jpg',
-                    href:''
-                  },{
-                    employedName:'John Doe',
-                    employedRoll:'Directive',
-                    imagePath:'img/jhondoe.jpg',
-                    href:''
-                  },{
-                    employedName:'John Doe',
-                    employedRoll:'Directive',
-                    imagePath:'img/jhondoe.jpg',
-                    href:''
-                  },{
-                    employedName:'John Doe',
-                    employedRoll:'Directive',
-                    imagePath:'img/jhondoe.jpg',
-                    href:''
-                  }],
+              optionName:'LISTA',
+              functionName:'secondListItem',
+              href:'',
+              functionData:[
+                {
+                  titleUl:'Lista 1',
+                  functionData:[
+                    {
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    },{
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    },{
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    }
+                  ]
+                },{
+                  titleUl:'Lista 2',
+                  functionData:[
+                    {
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    },{
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    },{
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    }
+                  ]
+                },{
+                  titleUl:'Lista 3',
+                  functionData:[
+                    {
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    },{
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    },{
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    }
+                  ]
+                },{
+                  titleUl:'Lista 1',
+                  functionData:[
+                    {
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    },{
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    },{
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    }
+                  ]
+                },{
+                  titleUl:'Lista 2',
+                  functionData:[
+                    {
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    },{
+                      titleLi:'OPTION 1',
+                      icon:'fa-gamepad',
+                      href:''
+                    },{
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    }
+                  ]
+                },{
+                  titleUl:'Lista 3',
+                  functionData:[
+                    {
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    },{
+                      titleLi:'OPTION 1',
+                      icon:'fa-free-code-camp',
+                      href:''
+                    },{
+                      titleLi:'OPTION 1',
+                      icon:'fa-tag',
+                      href:''
+                    }
+                  ]
+                }
+              ]
               },{
               optionName:'SLIDESecond',
               functionName:'secondMenuSlide',
@@ -615,9 +691,20 @@
           },{
           optionName:'TEAM',
           functionName:'workTeam',
+          colSize:'3',
           href:'',
           functionData:[{
-              employedName:'John Doe',
+              employedName:'John Doe rase',
+              employedRoll:'Directive',
+              imagePath:'img/jhondoe.jpg',
+              href:''
+            },{
+              employedName:'Jose Ramirez',
+              employedRoll:'Directive',
+              imagePath:'img/jhondoe.jpg',
+              href:''
+            },{
+              employedName:'Brock Ansiolitico',
               employedRoll:'Directive',
               imagePath:'img/jhondoe.jpg',
               href:''
@@ -632,7 +719,7 @@
               imagePath:'img/jhondoe.jpg',
               href:''
             },{
-              employedName:'John Doe',
+              employedName:'Jose Ramirez',
               employedRoll:'Directive',
               imagePath:'img/jhondoe.jpg',
               href:''
@@ -1013,21 +1100,135 @@
           ]
           },{
           optionName:'OTRO',
-          functionName:'',
+          functionName:'listItem',
           href:'',
           functionData:[
             {
-              imagePath:'img/jhondoe.jpg',
-              titleSlide:'PREVIEW 1',
-              textSlide:'Este es la primeta imagen'
+              titleUl:'Lista 1',
+              functionData:[
+                {
+                  titleLi:'OPTION 1',
+                  icon:'fa-bath',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-tag',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-bandcamp',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-eercast',
+                  href:''
+                }
+              ]
             },{
-              imagePath:'img/12s.jpg',
-              titleSlide:'PREVIEW 1',
-              textSlide:'Este es la primeta imagen'
+              titleUl:'Lista 2',
+              functionData:[
+                {
+                  titleLi:'WELLINTONG SOTO',
+                  icon:'fa-envelope-open',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-meetup',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-superpowers',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-tag',
+                  href:''
+                }
+              ]
             },{
-              imagePath:'img/tatu.jpg',
-              titleSlide:'PREVIEW 1',
-              textSlide:'Este es la primeta imagen'
+              titleUl:'Lista 3',
+              functionData:[
+                {
+                  titleLi:'OPTION 1',
+                  icon:'fa-tag',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-snowflake-o',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-window-close',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-tag',
+                  href:''
+                }
+              ]
+            },{
+              titleUl:'Lista 1',
+              functionData:[
+                {
+                  titleLi:'OPTION 1',
+                  icon:'fa-tag',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-tag',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-tag',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-tag',
+                  href:''
+                }
+              ]
+            },{
+              titleUl:'Lista 2',
+              functionData:[
+                {
+                  titleLi:'OPTION 1',
+                  icon:'fa-gamepad',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-tag',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-gamepad',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-tag',
+                  href:''
+                }
+              ]
+            },{
+              titleUl:'Lista 3',
+              functionData:[
+                {
+                  titleLi:'OPTION 1',
+                  icon:'fa-free-code-camp',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-tag',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-free-code-camp',
+                  href:''
+                },{
+                  titleLi:'OPTION 1',
+                  icon:'fa-tag',
+                  href:''
+                }
+              ]
             }
           ]
           }
